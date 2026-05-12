@@ -2,13 +2,11 @@
 
 > Pilot study examining how multilingual benchmark performance is shaped by (a) whether the benchmark is natively created or translated, and (b) whether models are evaluated with or without supporting context. Three models tested on extractive QA and MCQ in **Urdu** (Indo-Aryan, SOV, rich morphology, Perso-Arabic script) and **Indonesian** (Austronesian, SVO, light morphology, Latin script), with linguistic-phenomenon tagging. **Result: aggregate accuracy systematically conflates language ability with world knowledge, in directions that vary by language and which a diagnostic method makes visible.**
 
-Conducted as preparation for the PhD application *"Task-Specific and Linguistically Motivated Evaluation for Multilingual NLP"* at Inria ALMAnaCH (Bawden, Sagot).
-
 ---
 
 ## Motivation
 
-Current multilingual benchmarks report a single accuracy number, but that number conflates multiple distinct capabilities: linguistic competence, world knowledge stored in the model, susceptibility to artifacts of benchmark construction. As the framing of the [Inria ALMAnaCH PhD call](https://jobs.inria.fr/public/classic/fr/offres/2026-09982) notes, this conflation has led to misleading conclusions about high- vs. low-resource performance gaps. This pilot demonstrates a diagnostic methodology that systematically separates these confounds.
+Current multilingual benchmarks report a single accuracy number, but that number conflates multiple distinct capabilities: linguistic competence, world knowledge stored in the model, susceptibility to artifacts of benchmark construction. This pilot demonstrates a diagnostic methodology that systematically separates these confounds.
 
 ## Setup
 
@@ -21,7 +19,7 @@ Current multilingual benchmarks report a single accuracy number, but that number
 | Urdu | UQuAD, n=139 | Belebele `urd_Arab`, n=139 |
 | Indonesian | IndoQA validation, n=150 | Belebele `ind_Latn`, n=150 |
 
-**Models (via OpenRouter):**
+**Models:**
 - `anthropic/claude-opus-4.7` — frontier
 - `qwen/qwen-2.5-7b-instruct` — multilingual-tuned mid
 - `meta-llama/llama-3.1-8b-instruct` — weak baseline
