@@ -1,0 +1,62 @@
+================================================================
+ACCURACY (aggregate) — Urdu
+================================================================
+
+ dataset  condition           model   n  accuracy_%
+belebele        mcq claude_opus_4_7 139        92.1
+belebele        mcq     llama_31_8b 139        56.1
+belebele        mcq      qwen_25_7b 139        62.6
+   uquad closedbook claude_opus_4_7 139        79.1
+   uquad closedbook     llama_31_8b 139        28.8
+   uquad closedbook      qwen_25_7b 139        25.2
+   uquad   openbook claude_opus_4_7 139        91.4
+   uquad   openbook     llama_31_8b 139        85.6
+   uquad   openbook      qwen_25_7b 139        86.3
+
+================================================================
+Sliced by phenomenon — Urdu native open-book
+================================================================
+
+                 no_ergative_ne  has_ergative_ne  delta_ergative_ne
+model                                                              
+claude_opus_4_7            91.7             88.9               -2.8
+llama_31_8b                85.1             88.9                3.8
+qwen_25_7b                 87.6             77.8               -9.8
+
+                 no_izafat  has_izafat  delta_izafat
+model                                               
+claude_opus_4_7       93.4        77.8         -15.6
+llama_31_8b           86.8        77.8          -9.0
+qwen_25_7b            87.6        77.8          -9.8
+
+                 no_light_verb  has_light_verb  delta_light_verb
+model                                                           
+claude_opus_4_7           91.4            91.2              -0.2
+llama_31_8b               84.8            88.2               3.4
+qwen_25_7b                86.7            85.3              -1.4
+
+                 no_complex_NP  has_complex_NP  delta_complex_NP
+model                                                           
+claude_opus_4_7           90.9           100.0               9.1
+llama_31_8b               85.6            85.7               0.1
+qwen_25_7b                85.6           100.0              14.4
+
+================================================================
+Sliced by paraphrase_distance — Urdu native open-book
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+claude_opus_4_7               99.1        71.4                30.0
+llama_31_8b                   96.5        42.9                20.0
+qwen_25_7b                    94.8        64.3                20.0
+
+================================================================
+Sliced by domain — Urdu native open-book
+================================================================
+
+domain           general  islamic_history  pakistan_geography
+model                                                        
+claude_opus_4_7     94.0             77.3                93.9
+llama_31_8b         89.3             68.2                87.9
+qwen_25_7b          90.5             68.2                87.9

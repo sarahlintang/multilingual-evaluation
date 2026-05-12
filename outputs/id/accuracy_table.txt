@@ -1,0 +1,62 @@
+================================================================
+ACCURACY (aggregate) — Indonesian
+================================================================
+
+ dataset  condition           model   n  accuracy_%
+belebele        mcq claude_opus_4_7 150        94.7
+belebele        mcq     llama_31_8b 150        61.3
+belebele        mcq      qwen_25_7b 150        84.0
+  indoqa closedbook claude_opus_4_7 150        46.7
+  indoqa closedbook     llama_31_8b 150        12.7
+  indoqa closedbook      qwen_25_7b 150        17.3
+  indoqa   openbook claude_opus_4_7 150        96.0
+  indoqa   openbook     llama_31_8b 150        88.7
+  indoqa   openbook      qwen_25_7b 150        88.7
+
+================================================================
+Sliced by phenomenon — Indonesian native open-book
+================================================================
+
+                 no_voice_meN  has_voice_meN  delta_voice_meN
+model                                                        
+claude_opus_4_7          97.0           94.0             -3.0
+llama_31_8b              89.0           88.0             -1.0
+qwen_25_7b               89.0           88.0             -1.0
+
+                 no_voice_di  has_voice_di  delta_voice_di
+model                                                     
+claude_opus_4_7         95.3          97.7             2.4
+llama_31_8b             88.8          88.4            -0.4
+qwen_25_7b              86.9          93.0             6.1
+
+                 no_reduplication  has_reduplication  delta_reduplication
+model                                                                    
+claude_opus_4_7              95.8              100.0                  4.2
+llama_31_8b                  88.8               85.7                 -3.1
+qwen_25_7b                   88.8               85.7                 -3.1
+
+                 no_complex_NP_yang  has_complex_NP_yang  delta_complex_NP_yang
+model                                                                          
+claude_opus_4_7                96.1                 95.7                   -0.4
+llama_31_8b                    91.3                 83.0                   -8.3
+qwen_25_7b                     88.3                 89.4                    1.1
+
+================================================================
+Sliced by paraphrase_distance — Indonesian native open-book
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+claude_opus_4_7               96.3        92.9               100.0
+llama_31_8b                   88.8       100.0                 0.0
+qwen_25_7b                    88.8       100.0                 0.0
+
+================================================================
+Sliced by domain — Indonesian native open-book
+================================================================
+
+domain           general  indonesian_geography  indonesian_history
+model                                                             
+claude_opus_4_7     95.5                 100.0                96.4
+llama_31_8b         88.6                 100.0                87.5
+qwen_25_7b          90.9                  83.3                85.7
