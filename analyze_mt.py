@@ -43,15 +43,17 @@ MODEL_COLOR = {
     "gemma_4_31b_it":  "#34A853",
     "llama_31_8b":     "#9C27B0",
 }
-LANGS = ["id", "sw"]
-LANG_NAME = {"id": "Indonesian", "sw": "Swahili"}
+LANGS = ["id", "sw", "fr"]
+LANG_NAME = {"id": "Indonesian", "sw": "Swahili", "fr": "French"}
 METRICS = ["chrf", "comet", "adequacy", "fluency"]
 
 # Per-language required phenomena (must match run_mt.py BUCKETS)
 PHENOMENA = {
     "id": ["voice_meN", "voice_di", "complex_NP_yang"],
     "sw": ["noun_class_concord", "passive", "locative_ni"],
+    "fr": ["clitic_pronoun", "subjunctive", "complex_NP_relative"],
 }
+# QA pilot only covers Indonesian + Swahili (French has no QA counterpart)
 QA_NATIVE_DATASET = {"id": "indoqa", "sw": "tydiqa_sw"}
 
 
@@ -128,7 +130,9 @@ def per_tag(df: pd.DataFrame, metric: str) -> pd.DataFrame:
 
 def plot_system_level(df: pd.DataFrame) -> None:
     summary = system_level(df)
-    fig, axes = plt.subplots(1, 2, figsize=(14, 5.5))
+    fig, axes = plt.subplots(1, len(LANGS), figsize=(6.5 * len(LANGS), 5.5))
+    if len(LANGS) == 1:
+        axes = [axes]
     for ax, lang in zip(axes, LANGS):
         sub = summary[summary["lang"] == lang].set_index("model").reindex(MODELS)
         x = np.arange(len(MODELS))
@@ -154,7 +158,9 @@ def plot_system_level(df: pd.DataFrame) -> None:
 def plot_per_tag(df: pd.DataFrame, metric: str, fname: str) -> None:
     """Per (lang, phenomenon): with-X bars colored by model, with delta vs without-X annotated."""
     breakdown = per_tag(df, metric)
-    fig, axes = plt.subplots(1, 2, figsize=(15, 5.5))
+    fig, axes = plt.subplots(1, len(LANGS), figsize=(7 * len(LANGS), 5.5))
+    if len(LANGS) == 1:
+        axes = [axes]
     for ax, lang in zip(axes, LANGS):
         phenomena = PHENOMENA[lang]
         x = np.arange(len(phenomena))
@@ -211,6 +217,8 @@ def plot_cross_task(df_mt: pd.DataFrame) -> None:
 
     rows = []
     for lang in LANGS:
+        if lang not in QA_NATIVE_DATASET:
+            continue  # No QA pilot data for this language (e.g., French)
         for ph in PHENOMENA[lang]:
             for ml in MODELS:
                 # QA accuracy on items WITH phenomenon, openbook, native benchmark

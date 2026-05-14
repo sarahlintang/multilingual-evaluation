@@ -41,18 +41,19 @@ DATA_DIR.mkdir(exist_ok=True)
 RESULTS = DATA_DIR / "mt_results.jsonl"
 
 FLORES_DATASET = "openlanguagedata/flores_plus"
-FLORES_LANGS = {"eng": "eng_Latn", "id": "ind_Latn", "sw": "swh_Latn"}
+FLORES_LANGS = {"eng": "eng_Latn", "id": "ind_Latn", "sw": "swh_Latn", "fr": "fra_Latn"}
 FLORES_SPLIT = "devtest"
 
-LANG_NAME = {"id": "Indonesian", "sw": "Swahili"}
+LANG_NAME = {"id": "Indonesian", "sw": "Swahili", "fr": "French"}
 
 # Required buckets — sampling continues until each has >= per_bucket items
 BUCKETS = {
     "id": ["voice_meN", "voice_di", "complex_NP_yang", "none"],
     "sw": ["noun_class_concord", "passive", "locative_ni", "none"],
+    "fr": ["clitic_pronoun", "subjunctive", "complex_NP_relative"],
 }
 # Bonus buckets — tracked but don't gate sampling
-BONUS = {"id": ["reduplication"], "sw": ["applicative"]}
+BONUS = {"id": ["reduplication"], "sw": ["applicative"], "fr": ["past_participle_agreement"]}
 
 # (label, openrouter_model_id) — translation models (same lineup as QA pilot)
 MODELS = [
@@ -156,12 +157,27 @@ Return [] if none apply.
 Sentence: {text}
 
 Output exactly: {{"linguistic_phenomena": [...]}}""",
+
+    "fr": """Annotate the following French sentence for the linguistic phenomena listed below.
+
+linguistic_phenomena — list any present in the sentence:
+   - "clitic_pronoun": object/dative/locative pronoun clitic attached pre-verbally. Counts: "le, la, l', les, lui, leur, y, en" and "me, te, se, nous, vous" when functioning as object/dative/reflexive (NOT when these are subject pronouns). Examples: "je le vois" (I see him), "il lui parle" (he speaks to her), "j'y vais" (I go there), "elle s'en va" (she leaves). Do NOT count subject pronouns "je/tu/il/elle/nous/vous/ils/elles" or stressed forms "moi/toi/lui/elle/eux/elles" used after prepositions.
+   - "subjunctive": verb in subjunctive mood (present or imperfect). Examples: "qu'il soit" (that he be), "que nous fassions" (that we do), "qu'ils aient" (that they have), "bien qu'elle puisse" (although she can). Triggered by expressions of doubt/wish/necessity/emotion, or conjunctions like "pour que", "avant que", "bien que".
+   - "complex_NP_relative": noun phrase containing a relative clause introduced by `qui, que, qu', dont, où, lequel/laquelle/lesquels/lesquelles, duquel/desquels, auquel/auxquels`. Examples: "l'homme qui marche", "le livre que je lis", "la ville où j'habite", "la raison pour laquelle".
+   - "past_participle_agreement": past participle showing gender/number agreement with subject (in être passé composé) or with a preceding direct object (in avoir passé composé). Examples: "elle est partie" (subject agreement), "les pommes que j'ai mangées" (preceding DO agreement). Look for participles ending in -e/-es/-s where a base form -é would also be possible.
+
+Return [] if none apply.
+
+Sentence: {text}
+
+Output exactly: {{"linguistic_phenomena": [...]}}""",
 }
 
 
 TRANSLATE_SYSTEM = {
     "id": "Anda adalah penerjemah profesional. Terjemahkan ke bahasa Indonesia dengan akurat dan alami. Berikan hanya hasil terjemahan, tanpa penjelasan tambahan.",
     "sw": "Wewe ni mtafsiri mtaalamu. Tafsiri kwa Kiswahili kwa usahihi na asili. Toa tafsiri tu, bila ufafanuzi wa ziada.",
+    "fr": "Vous êtes un traducteur professionnel. Traduisez en français de manière précise et naturelle. Donnez uniquement la traduction, sans explication.",
 }
 
 TRANSLATE_USER_TMPL = "Translate the following English text to {target_lang}:\n\n{text}"
@@ -235,7 +251,7 @@ def stage_filter_and_tag(per_bucket: int, batch_size: int = 32) -> list[dict]:
     """
     all_items_dict = {it["id"]: it for it in read_jsonl(RESULTS)}
 
-    for lang in ["id", "sw"]:
+    for lang in ["id", "sw", "fr"]:
         bucket_targets = BUCKETS[lang]
         bonus_targets  = BONUS[lang]
 
