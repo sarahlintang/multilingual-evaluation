@@ -48,8 +48,8 @@ LANG_NAME = {"id": "Indonesian", "sw": "Swahili", "fr": "French"}
 
 # Required buckets — sampling continues until each has >= per_bucket items
 BUCKETS = {
-    "id": ["voice_meN", "voice_di", "complex_NP_yang", "none"],
-    "sw": ["noun_class_concord", "passive", "locative_ni", "none"],
+    "id": ["voice_meN", "voice_di", "complex_NP_yang"],
+    "sw": ["noun_class_concord", "passive", "locative_ni"],
     "fr": ["clitic_pronoun", "subjunctive", "complex_NP_relative"],
 }
 # Bonus buckets — tracked but don't gate sampling
