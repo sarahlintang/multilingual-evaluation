@@ -103,10 +103,11 @@ def call_openrouter(model_id: str, system: str, user: str, max_tokens: int = 400
 
 
 def call_openai_direct(model_id: str, system: str, user: str, max_tokens: int = 200) -> str:
+    # GPT-5.x family uses `max_completion_tokens` instead of `max_tokens`.
     resp = _openai_direct().chat.completions.create(
         model=model_id,
         messages=[{"role": "system", "content": system}, {"role": "user", "content": user}],
-        max_tokens=max_tokens,
+        max_completion_tokens=max_tokens,
     )
     return resp.choices[0].message.content or ""
 
