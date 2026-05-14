@@ -208,83 +208,108 @@ def load_flores_aligned(lang_code: str) -> list[dict]:
 
 # ---------- Stage 1: filter + tag ----------
 
-def tag_one(item: dict) -> dict:
+import time as _time
+
+def tag_one(item: dict, max_retries: int = 2) -> dict:
+    """Tag one item with retry on empty/invalid response (transient OpenRouter flakiness)."""
     user = TAG_USER_TMPL[item["lang"]].format(text=item["ref"])
-    return parse_json_strict(call_openrouter(TAGGER[1], TAG_SYSTEM, user, max_tokens=200))
+    last_err = None
+    for attempt in range(max_retries + 1):
+        try:
+            resp = call_openrouter(TAGGER[1], TAG_SYSTEM, user, max_tokens=300)
+            if not resp.strip():
+                raise ValueError("empty response")
+            return parse_json_strict(resp)
+        except (ValueError, json.JSONDecodeError) as e:
+            last_err = e
+            if attempt < max_retries:
+                _time.sleep(1.0 + attempt * 0.5)
+    raise last_err if last_err else ValueError("tag failed")
 
 
-def stage_filter_and_tag(per_bucket: int) -> list[dict]:
-    """Sample FLORES iteratively, tagging with Sonnet, fill required buckets to per_bucket."""
-    existing = {it["id"]: it for it in read_jsonl(RESULTS)}
-    all_items: list[dict] = []
+def stage_filter_and_tag(per_bucket: int, batch_size: int = 32) -> list[dict]:
+    """Sample FLORES, tag in parallel batches, fill required buckets to per_bucket.
+
+    Saves incrementally after each language so Ctrl+C never loses tag progress.
+    """
+    all_items_dict = {it["id"]: it for it in read_jsonl(RESULTS)}
 
     for lang in ["id", "sw"]:
         bucket_targets = BUCKETS[lang]
         bonus_targets  = BONUS[lang]
 
-        # Start with existing tagged items for this lang
-        existing_lang = [it for it in existing.values() if it["lang"] == lang and "tags" in it]
-        lang_items = list(existing_lang)
+        # Bootstrap from cache
+        existing_lang = [it for it in all_items_dict.values() if it["lang"] == lang and "tags" in it]
         buckets: dict[str, list[dict]] = defaultdict(list)
         for it in existing_lang:
             phenomena = it["tags"].get("linguistic_phenomena") or ["none"]
             for ph in phenomena:
                 buckets[ph].append(it)
 
-        already_full = all(len(buckets[b]) >= per_bucket for b in bucket_targets)
-        if already_full:
-            print(f"{LANG_NAME[lang]}: buckets already full from cache, n={len(lang_items)}")
-            all_items.extend(lang_items)
+        if all(len(buckets[b]) >= per_bucket for b in bucket_targets):
+            print(f"{LANG_NAME[lang]}: buckets already full from cache, n={len(existing_lang)}")
             continue
 
-        # Load FLORES, exclude already-seen, shuffle
+        # Candidates not yet in cache
         flores = load_flores_aligned(lang)
-        seen_ids = {it["id"] for it in existing_lang}
-        candidates = [r for r in flores if r["id"] not in seen_ids]
+        candidates = [r for r in flores if r["id"] not in all_items_dict]
         random.Random(RAND_SEED).shuffle(candidates)
 
-        print(f"\n{LANG_NAME[lang]}: filling {len(bucket_targets)} buckets to {per_bucket} each from {len(candidates)} candidates")
+        print(f"\n{LANG_NAME[lang]}: filling {len(bucket_targets)} buckets to {per_bucket} from {len(candidates)} candidates (batch={batch_size}, parallel)")
         print(f"  Required: {bucket_targets}")
-        print(f"  Bonus: {bonus_targets}")
+        print(f"  Bonus:    {bonus_targets}")
+        print(f"  Existing: " + ", ".join(f"{b}={len(buckets[b])}" for b in bucket_targets))
 
-        pbar = tqdm(candidates)
-        for candidate in pbar:
-            if all(len(buckets[b]) >= per_bucket for b in bucket_targets):
-                break
-            try:
-                tags = tag_one(candidate)
-            except Exception as e:
-                print(f"[tag fail] {candidate['id']}: {e}", file=sys.stderr)
-                continue
-            candidate["tags"] = tags
-            phenomena = tags.get("linguistic_phenomena") or ["none"]
+        idx = 0
+        pbar = tqdm(total=len(candidates), desc=f"tag {lang}")
+        while idx < len(candidates) and not all(len(buckets[b]) >= per_bucket for b in bucket_targets):
+            batch = candidates[idx:idx + batch_size]
+            idx += len(batch)
 
-            # Only keep item if it advances at least one non-full required bucket OR contributes to bonus
-            advances = any(
-                ph in bucket_targets and len(buckets[ph]) < per_bucket
-                for ph in phenomena
-            ) or any(ph in bonus_targets for ph in phenomena)
+            # Tag the batch concurrently
+            with ThreadPoolExecutor(max_workers=batch_size) as ex:
+                futs = {ex.submit(tag_one, c): c for c in batch}
+                for fut in as_completed(futs):
+                    c = futs[fut]
+                    try:
+                        c["tags"] = fut.result()
+                    except Exception as e:
+                        print(f"[tag fail] {c['id']}: {e}", file=sys.stderr)
 
-            if advances:
-                lang_items.append(candidate)
-                for ph in phenomena:
-                    if ph in bucket_targets or ph in bonus_targets:
-                        buckets[ph].append(candidate)
-                pbar.set_postfix({b: len(buckets[b]) for b in bucket_targets})
+            # Accept items that advance any non-full required bucket or any bonus bucket
+            for c in batch:
+                if "tags" not in c:
+                    continue
+                phenomena = c["tags"].get("linguistic_phenomena") or ["none"]
+                advances = any(
+                    ph in bucket_targets and len(buckets[ph]) < per_bucket
+                    for ph in phenomena
+                ) or any(ph in bonus_targets for ph in phenomena)
+                if advances:
+                    all_items_dict[c["id"]] = c
+                    for ph in phenomena:
+                        if ph in bucket_targets or ph in bonus_targets:
+                            buckets[ph].append(c)
 
-        # Report bucket fill
+            pbar.update(len(batch))
+            pbar.set_postfix({b: len(buckets[b]) for b in bucket_targets})
+        pbar.close()
+
+        # Report
         print(f"\n{LANG_NAME[lang]} final bucket counts:")
         for b in bucket_targets:
             n = len(buckets[b])
             mark = "✓" if n >= per_bucket else "✗"
             print(f"  {mark} {b}: {n}")
         for b in bonus_targets:
-            print(f"  (bonus) {b}: {len(buckets[b])}")
-        print(f"  Unique items sampled: {len(lang_items)}")
+            if buckets[b]:
+                print(f"  (bonus) {b}: {len(buckets[b])}")
 
-        all_items.extend(lang_items)
+        # Incremental save after each language
+        write_jsonl(RESULTS, list(all_items_dict.values()))
+        print(f"  Saved {len(all_items_dict)} items to {RESULTS}")
 
-    return all_items
+    return list(all_items_dict.values())
 
 
 # ---------- Stage 2: translate ----------
