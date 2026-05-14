@@ -1,20 +1,24 @@
 """
-Diagnostic pilot: native vs translated, Urdu + Indonesian.
+Diagnostic pilot v2: native vs translated extractive QA, Indonesian + Swahili.
 
 One command:
   python run_pipeline.py            # full run
   python run_pipeline.py --limit 5  # smoke test
   python run_pipeline.py --reset    # start fresh
 
+Prerequisite: Stage 0 translation → data/squad_id_gemini.jsonl, data/squad_sw_gemini.jsonl
+
 Single output: data/results.jsonl — one record per item with everything:
-  {id, dataset, lang, question, context, gold, [choices], tags,
+  {id, dataset, lang, question, context, gold, tags,
    predictions: {model: {condition: {prediction, verdict, reason, correct}}}}
 
-Datasets:
-  Urdu native:        UQuAD (extractive QA, 139 items)         openbook + closedbook
-  Urdu translated:    Belebele urd_Arab (MCQ)                  mcq
-  Indonesian native:  IndoQA validation (extractive QA, 150)   openbook + closedbook
-  Indonesian transl.: Belebele ind_Latn (MCQ)                  mcq
+Datasets (500 items each when data permits; --limit caps each source):
+  indoqa      — Indonesian native (IndoQA val, answerable)
+  squad_id    — Indonesian translated SQuAD (Gemini jsonl, span_found only)
+  tydiqa_sw   — Swahili native (TyDi QA secondary_task, HF `tydiqa`)
+  squad_sw    — Swahili translated SQuAD (Gemini jsonl, span_found only)
+
+Conditions: openbook + closedbook only (extractive QA).
 
 Fully resumable: each stage skips work already present per field.
 """
@@ -39,24 +43,31 @@ DATA_DIR = Path("data")
 DATA_DIR.mkdir(exist_ok=True)
 RESULTS = DATA_DIR / "results.jsonl"
 
-UQUAD_RAW = Path("/Users/sarahlintang/Documents/evaluation_research/multilingual-evaluation/urdu_uquad.jsonl")
 INDOQA_VAL_URL = "https://drive.google.com/uc?id=1mq_foV72riXb1KVBirJzTFZEe7oa8f4f"
 INDOQA_VAL_CACHE = DATA_DIR / "indoqa_val.json"
+SQUAD_ID_GEMINI = DATA_DIR / "squad_id_gemini.jsonl"
+SQUAD_SW_GEMINI = DATA_DIR / "squad_sw_gemini.jsonl"
+
+N_PER_BENCHMARK = 500
+PREPARE_SEED = 42
+V2_DATASETS = frozenset({"indoqa", "squad_id", "tydiqa_sw", "squad_sw"})
 
 # (label, openrouter_model_id)
 MODELS = [
-    ("claude_opus_4_7", "anthropic/claude-opus-4.7"),
-    ("qwen_25_7b",      "qwen/qwen-2.5-7b-instruct"),
+    ("gemini_3_pro",    "google/gemini-3.1-pro-preview"),
+    ("deepseek_v4_pro", "deepseek/deepseek-v4-pro"),
+    ("gemma_4_31b_it",  "google/gemma-4-31b-it"),
     ("llama_31_8b",     "meta-llama/llama-3.1-8b-instruct"),
 ]
 JUDGE_MODEL = ("gpt_4o_mini", "openai/gpt-4o-mini")
-TAGGER       = ("deepseek_v4_pro", "deepseek/deepseek-v4-pro")
+TAGGER       = ("claude_sonnet_4_6", "anthropic/claude-sonnet-4.6")
 
-CONDITIONS = {"uquad": ["openbook", "closedbook"],
-              "indoqa": ["openbook", "closedbook"],
-              "belebele": ["mcq"]}
-
-BELEBELE_CONFIG = {"ur": "urd_Arab", "id": "ind_Latn"}
+CONDITIONS = {
+    "indoqa": ["openbook", "closedbook"],
+    "squad_id": ["openbook", "closedbook"],
+    "tydiqa_sw": ["openbook", "closedbook"],
+    "squad_sw": ["openbook", "closedbook"],
+}
 
 CONCURRENCY = 64
 
@@ -105,32 +116,6 @@ def _parse_json_strict(text: str) -> dict:
 TAG_SYSTEM = "You are a linguistic annotator for reading-comprehension items in the specified language. Output strict JSON only — no prose, no markdown."
 
 TAG_USER_TMPL: dict[str, str] = {
-"ur": """Annotate the following **Urdu** RC item along three axes. The CONTEXT is provided as background; for `linguistic_phenomena` annotate **only what appears in the QUESTION sentence itself**.
-
-1) linguistic_phenomena — list of phenomena present **in the QUESTION sentence only**:
-   - "ergative_ne": ergative case marker نے on the SUBJECT of a past-tense transitive verb. INCLUDES interrogative subjects: "کس نے" (kis ne, "who-ERG"), "کن لوگوں نے", etc.
-   - "izafat": izafat / ezāfe construction (linker -e- between noun and modifier, e.g. خلافتِ راشدہ, دارُالحکومت). Linker is often a kasra ـِ but may also be unwritten.
-   - "light_verb": compound / light verb construction (noun or adjective + کرنا/ہونا/لینا/دینا/پانا, e.g. قتل کرنا, پیدا ہونا, وفات پانا)
-   - "complex_NP": noun phrase containing EITHER (a) a finite relative clause introduced by جو/جس/جن/کہ, OR (b) a non-finite participial relative such as V-stem + والے/والا/والی/والوں. Bare adjectival modifiers do NOT count.
-   Return [] if none apply to the question.
-
-2) paraphrase_distance — one of:
-   - "literal_match": gold answer appears as a near-exact span in the context, question rephrases the context only superficially
-   - "paraphrase": gold answer is in the context but the question is paraphrased
-   - "requires_inference": answer requires combining facts, counting, or inferential step
-
-3) domain — one of:
-   - "islamic_history": Islamic religious figures, caliphs, early Islamic events
-   - "pakistan_geography": Pakistan as a country (geography, borders, demographics)
-   - "general": anything else
-
-Item:
-Context: {context}
-Question: {question}
-Gold answer: {gold}
-
-Output exactly: {{"linguistic_phenomena": [...], "paraphrase_distance": "...", "domain": "..."}}""",
-
 "id": """Annotate the following **Indonesian** RC item along three axes. The CONTEXT is provided as background; for `linguistic_phenomena` annotate **only what appears in the QUESTION sentence itself**.
 
 1) linguistic_phenomena — list of phenomena present **in the QUESTION sentence only**:
@@ -156,22 +141,41 @@ Question: {question}
 Gold answer: {gold}
 
 Output exactly: {{"linguistic_phenomena": [...], "paraphrase_distance": "...", "domain": "..."}}""",
+
+"sw": """Annotate the following **Swahili** RC item along three axes. The CONTEXT is provided as background; for `linguistic_phenomena` annotate **only what appears in the QUESTION sentence itself**.
+
+1) linguistic_phenomena — list of phenomena present **in the QUESTION sentence only**:
+   - "noun_class_concord": noun class agreement marker on adjective, verb, or possessive (M-Wa class: m-/wa- prefix; Ki-Vi class: ki-/vi-; N class: n-; Ji-Ma class: ji-/ma-; U class: u-/n-; etc.). Examples: "watoto wadogo" (small children, M-Wa concord), "vitabu vyangu" (my books, Ki-Vi concord).
+   - "applicative": verb with applicative extension -i-/-e- adding a benefactive or directional argument. Examples: andikia (write to/for), pikia (cook for).
+   - "passive": verb with passive extension -w-. Examples: andikwa (be written), pikwa (be cooked). Do NOT confuse with question word "wapi" (where).
+   - "locative_ni": noun + locative suffix -ni indicating location/direction. Examples: nyumbani (at home), shuleni (at school), mjini (in town). Bare "ni" as copula ("ni mtoto", "is a child") does NOT count.
+   Return [] if none apply to the question.
+
+2) paraphrase_distance — one of:
+   - "literal_match": gold answer appears as a near-exact span in the context, question rephrases the context only superficially
+   - "paraphrase": gold answer is in the context but the question is paraphrased
+   - "requires_inference": answer requires combining facts, counting, or inferential step
+
+3) domain — one of:
+   - "east_african_history": Tanzania/Kenya/Uganda historical figures, events
+   - "east_african_geography": Tanzania/Kenya/Uganda/Swahili-coast geography
+   - "general": anything else
+
+Item:
+Context: {context}
+Question: {question}
+Gold answer: {gold}
+
+Output exactly: {{"linguistic_phenomena": [...], "paraphrase_distance": "...", "domain": "..."}}""",
 }
 
 
 INFER_SYSTEM = {
-    "ur": "آپ ایک معاون ہیں۔ صرف جواب لکھیں، اضافی وضاحت کے بغیر۔",
     "id": "Anda adalah asisten. Jawab dengan singkat, tanpa penjelasan tambahan.",
+    "sw": "Wewe ni msaidizi. Jibu kwa ufupi, bila maelezo ya ziada.",
 }
 
 OPENBOOK_TMPL = {
-"ur": """درج ذیل اقتباس کی بنیاد پر سوال کا جواب دیں۔
-
-اقتباس: {context}
-
-سوال: {question}
-
-جواب:""",
 "id": """Berdasarkan bacaan berikut, jawab pertanyaannya.
 
 Bacaan: {context}
@@ -179,51 +183,27 @@ Bacaan: {context}
 Pertanyaan: {question}
 
 Jawaban:""",
+"sw": """Kulingana na kifungu kifuatacho, jibu swali.
+
+Kifungu: {context}
+
+Swali: {question}
+
+Jibu:""",
 }
 
 CLOSEDBOOK_TMPL = {
-"ur": """درج ذیل سوال کا جواب دیں۔
-
-سوال: {question}
-
-جواب:""",
 "id": """Jawab pertanyaan berikut.
 
 Pertanyaan: {question}
 
 Jawaban:""",
+"sw": """Jibu swali lifuatalo.
+
+Swali: {question}
+
+Jibu:""",
 }
-
-BELEBELE_TMPL = {
-"ur": """درج ذیل اقتباس کو پڑھیں اور سوال کا درست جواب منتخب کریں۔ صرف اختیار کا نمبر (1، 2، 3، یا 4) لکھیں۔
-
-اقتباس: {context}
-
-سوال: {question}
-
-اختیارات:
-1. {c1}
-2. {c2}
-3. {c3}
-4. {c4}
-
-جواب:""",
-"id": """Baca bacaan berikut dan pilih jawaban yang benar. Tulis hanya nomor pilihan (1, 2, 3, atau 4).
-
-Bacaan: {context}
-
-Pertanyaan: {question}
-
-Pilihan:
-1. {c1}
-2. {c2}
-3. {c3}
-4. {c4}
-
-Jawaban:""",
-}
-
-
 JUDGE_SYSTEM = "You are evaluating a multilingual QA system. Output strict JSON only."
 
 JUDGE_TMPL = """Compare the predicted answer to the gold answer. The question is in {language_name}. Verdict "correct" if the prediction conveys the same factual content as the gold (allowing paraphrasing, normalization differences, partial-vs-full names, dates in different formats). Otherwise "incorrect".
@@ -234,7 +214,7 @@ Predicted answer: {prediction}
 
 Output: {{"verdict": "correct" | "incorrect", "reason": "<one short sentence>"}}"""
 
-LANG_NAME = {"ur": "Urdu", "id": "Indonesian"}
+LANG_NAME = {"id": "Indonesian", "sw": "Swahili"}
 
 
 def build_prompt(item: dict, condition: str) -> str:
@@ -243,16 +223,66 @@ def build_prompt(item: dict, condition: str) -> str:
         return OPENBOOK_TMPL[lang].format(context=item["context"], question=item["question"])
     if condition == "closedbook":
         return CLOSEDBOOK_TMPL[lang].format(question=item["question"])
-    if condition == "mcq":
-        ch = item["choices"]
-        return BELEBELE_TMPL[lang].format(
-            context=item["context"], question=item["question"],
-            c1=ch["1"], c2=ch["2"], c3=ch["3"], c4=ch["4"],
-        )
     raise ValueError(condition)
 
 
 # ---------- Stage 1: prepare ----------
+
+
+def _gemini_squad_items(path: Path, dataset: str, lang: str, n_take: int) -> list[dict]:
+    if not path.exists():
+        print(f"[prepare] Missing {path}; run translate_squad.py for {dataset}.", file=sys.stderr)
+        return []
+    rows = [r for r in read_jsonl(path) if r.get("span_found")]
+    rows = rows[:n_take]
+    out: list[dict] = []
+    for r in rows:
+        sid = str(r["id"]).replace("/", "_")
+        out.append(
+            {
+                "id": f"{dataset}_{sid}",
+                "dataset": dataset,
+                "lang": lang,
+                "question": r["question"].strip(),
+                "context": r["context"].strip(),
+                "gold": r["gold"].strip(),
+            }
+        )
+    if len(out) < n_take:
+        print(
+            f"[prepare] {dataset}: only {len(out)}/{n_take} rows with span_found.",
+            file=sys.stderr,
+        )
+    return out
+
+
+def _tydiqa_sw_items(n_take: int) -> list[dict]:
+    from datasets import concatenate_datasets, load_dataset
+
+    tr = load_dataset("tydiqa", "secondary_task", split="train")
+    va = load_dataset("tydiqa", "secondary_task", split="validation")
+    sw_tr = tr.filter(lambda ex: ex["id"].startswith("swahili"))
+    sw_va = va.filter(lambda ex: ex["id"].startswith("swahili"))
+    sw = concatenate_datasets([sw_tr, sw_va])
+    sw = sw.shuffle(seed=PREPARE_SEED)
+    sw = sw.select(range(min(n_take, len(sw))))
+    out: list[dict] = []
+    for ex in sw:
+        texts = ex["answers"]["text"]
+        gold = texts[0].strip() if texts else ""
+        oid = str(ex["id"]).replace("/", "_")
+        out.append(
+            {
+                "id": f"tydiqa_sw_{oid}",
+                "dataset": "tydiqa_sw",
+                "lang": "sw",
+                "question": ex["question"].strip(),
+                "context": ex["context"].strip(),
+                "gold": gold,
+            }
+        )
+    return out
+
 
 def _ensure_indoqa() -> list[dict]:
     if not INDOQA_VAL_CACHE.exists():
@@ -262,73 +292,44 @@ def _ensure_indoqa() -> list[dict]:
 
 
 def prepare(limit: int | None = None) -> list[dict]:
-    """Build complete item list (Urdu + Indonesian, native + translated), merging with existing results."""
+    """Build v2 item list (4 benchmarks); merge with existing results.jsonl by id."""
     existing = {it["id"]: it for it in read_jsonl(RESULTS)}
     items: list[dict] = []
 
-    # ---- Urdu UQuAD (native, extractive) ----
-    if UQUAD_RAW.exists():
-        raw = read_jsonl(UQUAD_RAW)
-        n = limit if limit is not None else len(raw)
-        for i, r in enumerate(raw[:n]):
-            items.append({
-                "id": f"uquad_{i:04d}", "dataset": "uquad", "lang": "ur",
-                "question": r["question_urdu"].strip(),
-                "context":  r["context_urdu"].strip(),
-                "gold":     r["answer_urdu"].strip(),
-            })
-
-    from datasets import load_dataset
-    rng = random.Random(0)
-
-    # ---- Urdu Belebele (translated, MCQ) ----
-    ds_ur = load_dataset("facebook/belebele", BELEBELE_CONFIG["ur"], split="test")
-    n_bel = limit if limit is not None else 139
-    for k, i in enumerate(rng.sample(range(len(ds_ur)), min(n_bel, len(ds_ur)))):
-        r = ds_ur[i]
-        items.append({
-            "id": f"belebele_ur_{k:04d}", "dataset": "belebele", "lang": "ur",
-            "question": r["question"].strip(),
-            "context":  r["flores_passage"].strip(),
-            "gold":     str(r["correct_answer_num"]).strip(),
-            "choices":  {str(j+1): r[f"mc_answer{j+1}"].strip() for j in range(4)},
-        })
+    n_take = min(limit, N_PER_BENCHMARK) if limit is not None else N_PER_BENCHMARK
 
     # ---- Indonesian IndoQA (native, extractive) ----
     indoqa_rows = _ensure_indoqa()
-    # Filter out unanswerable items (answer is None / category UNANSWERABLE)
     indoqa_rows = [r for r in indoqa_rows if r.get("answer") and r.get("category") != "UNANSWERABLE"]
-    n_id = limit if limit is not None else 150
-    rng_id = random.Random(1)
-    idxs = rng_id.sample(range(len(indoqa_rows)), min(n_id, len(indoqa_rows)))
-    for k, i in enumerate(idxs):
+    rng_id = random.Random(PREPARE_SEED)
+    id_order = list(range(len(indoqa_rows)))
+    rng_id.shuffle(id_order)
+    id_order = id_order[: min(n_take, len(indoqa_rows))]
+    for k, i in enumerate(id_order):
         r = indoqa_rows[i]
-        items.append({
-            "id": f"indoqa_{k:04d}", "dataset": "indoqa", "lang": "id",
-            "question": r["question"].strip(),
-            "context":  r["context"].strip(),
-            "gold":     r["answer"].strip(),
-        })
+        items.append(
+            {
+                "id": f"indoqa_{k:04d}",
+                "dataset": "indoqa",
+                "lang": "id",
+                "question": r["question"].strip(),
+                "context": r["context"].strip(),
+                "gold": r["answer"].strip(),
+            }
+        )
+    if len(id_order) < n_take:
+        print(
+            f"[prepare] indoqa: only {len(id_order)}/{n_take} answerable items in cache.",
+            file=sys.stderr,
+        )
 
-    # ---- Indonesian Belebele (translated, MCQ) ----
-    ds_id = load_dataset("facebook/belebele", BELEBELE_CONFIG["id"], split="test")
-    rng_bel_id = random.Random(2)
-    n_bel_id = limit if limit is not None else 150
-    for k, i in enumerate(rng_bel_id.sample(range(len(ds_id)), min(n_bel_id, len(ds_id)))):
-        r = ds_id[i]
-        items.append({
-            "id": f"belebele_id_{k:04d}", "dataset": "belebele", "lang": "id",
-            "question": r["question"].strip(),
-            "context":  r["flores_passage"].strip(),
-            "gold":     str(r["correct_answer_num"]).strip(),
-            "choices":  {str(j+1): r[f"mc_answer{j+1}"].strip() for j in range(4)},
-        })
+    items.extend(_gemini_squad_items(SQUAD_ID_GEMINI, "squad_id", "id", n_take))
+    items.extend(_tydiqa_sw_items(n_take))
+    items.extend(_gemini_squad_items(SQUAD_SW_GEMINI, "squad_sw", "sw", n_take))
 
-    # Merge: prefer existing items (which have tags / predictions / verdicts).
-    # Also preserve any existing items not generated this round (e.g., when --limit is set).
     new_ids = {it["id"] for it in items}
     merged = [existing.get(it["id"], it) for it in items]
-    extras = [it for it in existing.values() if it["id"] not in new_ids]
+    extras = [it for it in existing.values() if it["id"] not in new_ids and it.get("dataset") in V2_DATASETS]
     return merged + extras
 
 
@@ -402,21 +403,9 @@ def judge_one(item: dict, prediction: str) -> dict:
 def stage_judge(items: list[dict]) -> None:
     by_id = {it["id"]: it for it in items}
 
-    # Belebele MCQ: exact-match in-process
-    for it in items:
-        if it["dataset"] != "belebele":
-            continue
-        for ml, _ in MODELS:
-            entry = it.get("predictions", {}).get(ml, {}).get("mcq")
-            if entry and "prediction" in entry and "correct" not in entry:
-                chosen = next((c for c in entry["prediction"] if c in "1234"), "")
-                entry["chosen"] = chosen
-                entry["correct"] = (chosen == it["gold"])
-
-    # Extractive QA (UQuAD + IndoQA): LLM judge
     jobs: list[tuple[str, str, str]] = []
     for it in items:
-        if it["dataset"] not in ("uquad", "indoqa"):
+        if it["dataset"] not in V2_DATASETS:
             continue
         for ml, _ in MODELS:
             for cond in ("openbook", "closedbook"):

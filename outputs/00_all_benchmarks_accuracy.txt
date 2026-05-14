@@ -1,0 +1,45 @@
+========================================================================
+ALL BENCHMARKS — Indonesian + Swahili (native + translated)
+========================================================================
+
+  dataset  condition           model   n  accuracy_%
+   indoqa closedbook deepseek_v4_pro 500        47.8
+   indoqa closedbook    gemini_3_pro 500        52.6
+   indoqa closedbook  gemma_4_31b_it 500        35.2
+   indoqa closedbook     llama_31_8b 500        11.4
+   indoqa   openbook deepseek_v4_pro 500        93.2
+   indoqa   openbook    gemini_3_pro 500        94.6
+   indoqa   openbook  gemma_4_31b_it 500        95.0
+   indoqa   openbook     llama_31_8b 500        88.2
+ squad_id closedbook deepseek_v4_pro 499        47.1
+ squad_id closedbook    gemini_3_pro 499        54.7
+ squad_id closedbook  gemma_4_31b_it 499        33.5
+ squad_id closedbook     llama_31_8b 499        13.2
+ squad_id   openbook deepseek_v4_pro 499        93.0
+ squad_id   openbook    gemini_3_pro 499        93.4
+ squad_id   openbook  gemma_4_31b_it 499        93.2
+ squad_id   openbook     llama_31_8b 499        85.4
+tydiqa_sw closedbook deepseek_v4_pro 500        62.8
+tydiqa_sw closedbook    gemini_3_pro 500        64.0
+tydiqa_sw closedbook  gemma_4_31b_it 500        51.4
+tydiqa_sw closedbook     llama_31_8b 500        27.0
+tydiqa_sw   openbook deepseek_v4_pro 500        83.8
+tydiqa_sw   openbook    gemini_3_pro 500        88.2
+tydiqa_sw   openbook  gemma_4_31b_it 500        85.4
+tydiqa_sw   openbook     llama_31_8b 500        72.2
+ squad_sw closedbook deepseek_v4_pro 498        42.8
+ squad_sw closedbook    gemini_3_pro 498        52.8
+ squad_sw closedbook  gemma_4_31b_it 498        30.7
+ squad_sw closedbook     llama_31_8b 498         8.6
+ squad_sw   openbook deepseek_v4_pro 498        92.6
+ squad_sw   openbook    gemini_3_pro 498        93.6
+ squad_sw   openbook  gemma_4_31b_it 498        93.6
+ squad_sw   openbook     llama_31_8b 498        71.5
+
+------------------------------------------------------------------------
+Tagged items per dataset:
+
+  IndoQA (ID native)                         n_tagged=500
+  SQuAD-ID (ID translated)                   n_tagged=499
+  TyDi QA (SW native)                        n_tagged=500
+  SQuAD-SW (SW translated)                   n_tagged=498

@@ -78,12 +78,12 @@ On closed-book UQuAD items where the small models fail, the failure pattern is s
 
 Aggregate accuracy treats every wrong answer as equivalent. The diagnostic perspective is that the *failure mode itself* is a meaningful result — and it depends on the model's pretraining bias, not just its overall capability.
 
-## What this pilot says about the broader methodology
+## What this pilot suggests for the broader methodology
 
-1. **Open- / closed-book contrast** is a cheap, effective primitive for separating language ability from world knowledge. It should be standard practice for any extractive-answerable benchmark.
-2. **Coverage reports** — the linguistic-phenomenon distribution of a benchmark — should precede or accompany score reports. *What* a benchmark tests is more important than how well models happen to score on it.
-3. **Diagnostic tagging must distinguish linguistic complexity from task scaffolding**; surface-form tagging is a starting point, not an endpoint.
-4. **Direction of native-vs-translated artifact is language-specific** and cannot be predicted *a priori*. Diagnostic methods are needed for every (language, benchmark) pair.
+1. **Open- vs. closed-book comparison is a simple but effective method** for separating language ability from world knowledge. Because it is low-cost and easy to apply, it should become a standard step for any benchmark whose answers can be extracted from a passage.
+2. **Coverage reports should be presented before, or together with, accuracy scores.** A description of the linguistic phenomena inside a benchmark is more informative than the score itself, because *what* a benchmark measures determines how the score should be interpreted.
+3. **Surface-form tagging is only a first step.** The same tag can correspond to a feature that makes the task harder (linguistic complexity) or to a feature that makes it easier (task scaffolding). For example, the `complex_NP` tag on UQuAD covers items such as *"the prisoners who stayed in the yard after the fight"*, where the relative clause both adds syntactic complexity and points directly to the relevant span in the passage. Similarly, the Indonesian `voice_meN` tag groups together productive active-voice forms (*membaca*, "to read") and lexicalised forms that speakers no longer analyse morphologically (*menjadi*, "to become"). A more useful diagnostic should distinguish between these two roles.
+4. **The direction of translation artifacts is language-specific** and cannot be predicted in advance. In this study, translation reduces the rate of *izafat* in Urdu but increases the rate of *yang*-clauses in Indonesian. Diagnostic analysis is therefore needed for every (language, benchmark) pair, not only once per language family.
 
 ## Limitations
 

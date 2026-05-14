@@ -3,60 +3,127 @@ ACCURACY (aggregate) — Indonesian
 ================================================================
 
  dataset  condition           model   n  accuracy_%
-belebele        mcq claude_opus_4_7 150        94.7
-belebele        mcq     llama_31_8b 150        61.3
-belebele        mcq      qwen_25_7b 150        84.0
-  indoqa closedbook claude_opus_4_7 150        46.7
-  indoqa closedbook     llama_31_8b 150        12.7
-  indoqa closedbook      qwen_25_7b 150        17.3
-  indoqa   openbook claude_opus_4_7 150        96.0
-  indoqa   openbook     llama_31_8b 150        88.7
-  indoqa   openbook      qwen_25_7b 150        88.7
+  indoqa closedbook deepseek_v4_pro 500        47.8
+  indoqa closedbook    gemini_3_pro 500        52.6
+  indoqa closedbook  gemma_4_31b_it 500        35.2
+  indoqa closedbook     llama_31_8b 500        11.4
+  indoqa   openbook deepseek_v4_pro 500        93.2
+  indoqa   openbook    gemini_3_pro 500        94.6
+  indoqa   openbook  gemma_4_31b_it 500        95.0
+  indoqa   openbook     llama_31_8b 500        88.2
+squad_id closedbook deepseek_v4_pro 499        47.1
+squad_id closedbook    gemini_3_pro 499        54.7
+squad_id closedbook  gemma_4_31b_it 499        33.5
+squad_id closedbook     llama_31_8b 499        13.2
+squad_id   openbook deepseek_v4_pro 499        93.0
+squad_id   openbook    gemini_3_pro 499        93.4
+squad_id   openbook  gemma_4_31b_it 499        93.2
+squad_id   openbook     llama_31_8b 499        85.4
 
 ================================================================
-Sliced by phenomenon — Indonesian native open-book
+Sliced by phenomenon — Indonesian native open-book (indoqa)
 ================================================================
 
                  no_voice_meN  has_voice_meN  delta_voice_meN
 model                                                        
-claude_opus_4_7          97.0           94.0             -3.0
-llama_31_8b              89.0           88.0             -1.0
-qwen_25_7b               89.0           88.0             -1.0
+deepseek_v4_pro          92.8           97.4              4.6
+gemini_3_pro             94.4           97.4              3.0
+gemma_4_31b_it           94.8           97.4              2.6
+llama_31_8b              87.6           94.9              7.3
 
                  no_voice_di  has_voice_di  delta_voice_di
 model                                                     
-claude_opus_4_7         95.3          97.7             2.4
-llama_31_8b             88.8          88.4            -0.4
-qwen_25_7b              86.9          93.0             6.1
+deepseek_v4_pro         93.2          93.2             0.0
+gemini_3_pro            94.4          95.9             1.5
+gemma_4_31b_it          94.8          95.9             1.1
+llama_31_8b             88.3          87.8            -0.5
 
                  no_reduplication  has_reduplication  delta_reduplication
 model                                                                    
-claude_opus_4_7              95.8              100.0                  4.2
-llama_31_8b                  88.8               85.7                 -3.1
-qwen_25_7b                   88.8               85.7                 -3.1
+deepseek_v4_pro              93.1              100.0                  6.9
+gemini_3_pro                 94.5              100.0                  5.5
+gemma_4_31b_it               94.9              100.0                  5.1
+llama_31_8b                  88.1              100.0                 11.9
 
                  no_complex_NP_yang  has_complex_NP_yang  delta_complex_NP_yang
 model                                                                          
-claude_opus_4_7                96.1                 95.7                   -0.4
-llama_31_8b                    91.3                 83.0                   -8.3
-qwen_25_7b                     88.3                 89.4                    1.1
+deepseek_v4_pro                93.2                 93.3                    0.1
+gemini_3_pro                   94.4                 95.6                    1.2
+gemma_4_31b_it                 95.4                 93.3                   -2.1
+llama_31_8b                    88.3                 87.8                   -0.5
 
 ================================================================
-Sliced by paraphrase_distance — Indonesian native open-book
+Sliced by paraphrase_distance — Indonesian native open-book (indoqa)
 ================================================================
 
 paraphrase_distance  literal_match  paraphrase  requires_inference
 model                                                             
-claude_opus_4_7               96.3        92.9               100.0
-llama_31_8b                   88.8       100.0                 0.0
-qwen_25_7b                    88.8       100.0                 0.0
+deepseek_v4_pro               96.2        92.2                50.0
+gemini_3_pro                  97.1        94.0                50.0
+gemma_4_31b_it                97.6        94.3                50.0
+llama_31_8b                   93.3        85.9                37.5
 
 ================================================================
-Sliced by domain — Indonesian native open-book
+Sliced by domain — Indonesian native open-book (indoqa)
 ================================================================
 
 domain           general  indonesian_geography  indonesian_history
 model                                                             
-claude_opus_4_7     95.5                 100.0                96.4
-llama_31_8b         88.6                 100.0                87.5
-qwen_25_7b          90.9                  83.3                85.7
+deepseek_v4_pro     92.0                 100.0                93.8
+gemini_3_pro        93.5                 100.0                95.2
+gemma_4_31b_it      94.6                 100.0                94.7
+llama_31_8b         87.0                  96.7                88.5
+
+================================================================
+Sliced by phenomenon — Indonesian translated open-book (squad_id)
+================================================================
+
+                 no_voice_meN  has_voice_meN  delta_voice_meN
+model                                                        
+deepseek_v4_pro          92.9           93.8              0.9
+gemini_3_pro             93.1           96.9              3.8
+gemma_4_31b_it           93.4           90.6             -2.8
+llama_31_8b              85.0           90.6              5.6
+
+                 no_voice_di  has_voice_di  delta_voice_di
+model                                                     
+deepseek_v4_pro         93.3          90.8            -2.5
+gemini_3_pro            93.8          90.8            -3.0
+gemma_4_31b_it          93.1          93.8             0.7
+llama_31_8b             85.5          84.6            -0.9
+
+                 no_reduplication  has_reduplication  delta_reduplication
+model                                                                    
+deepseek_v4_pro              92.9              100.0                  7.1
+gemini_3_pro                 93.3              100.0                  6.7
+gemma_4_31b_it               93.1              100.0                  6.9
+llama_31_8b                  85.3              100.0                 14.7
+
+                 no_complex_NP_yang  has_complex_NP_yang  delta_complex_NP_yang
+model                                                                          
+deepseek_v4_pro                93.3                 91.7                   -1.6
+gemini_3_pro                   93.5                 92.9                   -0.6
+gemma_4_31b_it                 93.7                 90.5                   -3.2
+llama_31_8b                    84.8                 88.1                    3.3
+
+================================================================
+Sliced by paraphrase_distance — Indonesian translated open-book (squad_id)
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+deepseek_v4_pro               95.8        92.1                81.2
+gemini_3_pro                  95.8        92.4                87.5
+gemma_4_31b_it                95.8        92.4                81.2
+llama_31_8b                   91.0        82.3                87.5
+
+================================================================
+Sliced by domain — Indonesian translated open-book (squad_id)
+================================================================
+
+domain           general  indonesian_geography  indonesian_history
+model                                                             
+deepseek_v4_pro     92.9                 100.0               100.0
+gemini_3_pro        93.3                 100.0               100.0
+gemma_4_31b_it      93.1                 100.0               100.0
+llama_31_8b         85.3                 100.0               100.0

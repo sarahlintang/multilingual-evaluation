@@ -2,36 +2,36 @@
 COVERAGE REPORT — Indonesian
 ================================================================
 
-IndoQA (native)  (n=150)
+IndoQA (native)  (n=500)
 ----------------------------------------
 Linguistic phenomena (% of items):
-  voice_meN                50  ( 33.3%)
-  voice_di                 43  ( 28.7%)
-  reduplication             7  (  4.7%)
-  complex_NP_yang          47  ( 31.3%)
-  none                     47  ( 31.3%)
+  voice_meN                39  (  7.8%)
+  voice_di                 74  ( 14.8%)
+  reduplication             6  (  1.2%)
+  complex_NP_yang          90  ( 18.0%)
+  none                    326  ( 65.2%)
 Paraphrase distance:
-  literal_match           134  ( 89.3%)
-  paraphrase               14  (  9.3%)
-  requires_inference        2  (  1.3%)
+  literal_match           209  ( 41.8%)
+  paraphrase              283  ( 56.6%)
+  requires_inference        8  (  1.6%)
 Domain:
-  indonesian_history       56  ( 37.3%)
-  indonesian_geography      6  (  4.0%)
-  general                  88  ( 58.7%)
+  indonesian_history      209  ( 41.8%)
+  indonesian_geography     30  (  6.0%)
+  general                 261  ( 52.2%)
 
-Belebele-id (translated)  (n=150)
+SQuAD-ID (Gemini translated)  (n=499)
 ----------------------------------------
 Linguistic phenomena (% of items):
-  voice_meN                66  ( 44.0%)
-  voice_di                 45  ( 30.0%)
-  reduplication             5  (  3.3%)
-  complex_NP_yang          71  ( 47.3%)
-  none                     28  ( 18.7%)
+  voice_meN                32  (  6.4%)
+  voice_di                 65  ( 13.0%)
+  reduplication             4  (  0.8%)
+  complex_NP_yang          84  ( 16.8%)
+  none                    341  ( 68.3%)
 Paraphrase distance:
-  literal_match            32  ( 21.3%)
-  paraphrase               64  ( 42.7%)
-  requires_inference       54  ( 36.0%)
+  literal_match           166  ( 33.3%)
+  paraphrase              317  ( 63.5%)
+  requires_inference       16  (  3.2%)
 Domain:
-  indonesian_history        0  (  0.0%)
-  indonesian_geography      0  (  0.0%)
-  general                 150  (100.0%)
+  indonesian_history        1  (  0.2%)
+  indonesian_geography      3  (  0.6%)
+  general                 495  ( 99.2%)
