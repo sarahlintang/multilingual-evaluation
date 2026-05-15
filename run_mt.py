@@ -233,7 +233,7 @@ def tag_one(item: dict, max_retries: int = 2) -> dict:
     last_err = None
     for attempt in range(max_retries + 1):
         try:
-            resp = call_openrouter(TAGGER[1], TAG_SYSTEM, user, max_tokens=300)
+            resp = call_openrouter(TAGGER[1], TAG_SYSTEM, user, max_tokens=4192)
             if not resp.strip():
                 raise ValueError("empty response")
             return parse_json_strict(resp)
@@ -348,7 +348,7 @@ def stage_translate(items: list[dict]) -> None:
         iid, ml, mid = j
         it = by_id[iid]
         user = TRANSLATE_USER_TMPL.format(target_lang=LANG_NAME[it["lang"]], text=it["src_en"])
-        out = call_openrouter(mid, TRANSLATE_SYSTEM[it["lang"]], user, max_tokens=400)
+        out = call_openrouter(mid, TRANSLATE_SYSTEM[it["lang"]], user, max_tokens=4192)
         return j, out.strip()
 
     with ThreadPoolExecutor(max_workers=CONCURRENCY) as ex:
@@ -424,7 +424,7 @@ def judge_one(item: dict, hyp: str) -> dict:
         target_lang=LANG_NAME[item["lang"]],
         src=item["src_en"], ref=item["ref"], hyp=hyp,
     )
-    return parse_json_strict(call_openai_direct(JUDGE[1], JUDGE_SYSTEM, user, max_tokens=200))
+    return parse_json_strict(call_openai_direct(JUDGE[1], JUDGE_SYSTEM, user, max_tokens=4192))
 
 
 def stage_judge(items: list[dict]) -> None:
