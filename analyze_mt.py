@@ -90,14 +90,20 @@ def has_phenomenon(phenomena_list, ph):
 
 # ---------- Tables ----------
 
+def langs_in(df: pd.DataFrame) -> list[str]:
+    """Return configured langs that actually have rows in `df`, preserving LANGS order."""
+    present = set(df["lang"].unique()) if not df.empty else set()
+    return [lg for lg in LANGS if lg in present]
+
+
 def system_level(df: pd.DataFrame) -> pd.DataFrame:
     rows = []
-    for lang in LANGS:
+    for lang in langs_in(df):
         for ml in MODELS:
             sub = df[(df["lang"] == lang) & (df["model"] == ml)]
             row = {"lang": lang, "model": ml, "n": len(sub)}
             for m in METRICS:
-                row[m] = sub[m].mean()
+                row[m] = sub[m].mean() if not sub.empty else float("nan")
             rows.append(row)
     return pd.DataFrame(rows)
 
@@ -105,14 +111,24 @@ def system_level(df: pd.DataFrame) -> pd.DataFrame:
 def per_tag(df: pd.DataFrame, metric: str) -> pd.DataFrame:
     """Per (lang, phenomenon, model): with-X mean, without-X mean, delta."""
     rows = []
-    for lang in LANGS:
+    for lang in langs_in(df):
         for ph in PHENOMENA[lang]:
             for ml in MODELS:
                 base = df[(df["lang"] == lang) & (df["model"] == ml)]
-                sub_with    = base[base["phenomena"].apply(lambda xs: has_phenomenon(xs, ph))]
-                sub_without = base[~base["phenomena"].apply(lambda xs: has_phenomenon(xs, ph))]
-                with_mean    = sub_with[metric].mean()
-                without_mean = sub_without[metric].mean()
+                if base.empty:
+                    rows.append({
+                        "lang": lang, "phenomenon": ph, "model": ml,
+                        "n_with": 0, "n_without": 0,
+                        f"{metric}_with": float("nan"),
+                        f"{metric}_without": float("nan"),
+                        f"{metric}_delta": float("nan"),
+                    })
+                    continue
+                mask_with    = base["phenomena"].apply(lambda xs: has_phenomenon(xs, ph))
+                sub_with     = base[mask_with]
+                sub_without  = base[~mask_with]
+                with_mean    = sub_with[metric].mean()    if not sub_with.empty    else float("nan")
+                without_mean = sub_without[metric].mean() if not sub_without.empty else float("nan")
                 rows.append({
                     "lang":           lang,
                     "phenomenon":     ph,
@@ -130,10 +146,14 @@ def per_tag(df: pd.DataFrame, metric: str) -> pd.DataFrame:
 
 def plot_system_level(df: pd.DataFrame) -> None:
     summary = system_level(df)
-    fig, axes = plt.subplots(1, len(LANGS), figsize=(6.5 * len(LANGS), 5.5))
-    if len(LANGS) == 1:
+    langs = langs_in(df)
+    if not langs:
+        print("Skipping system-level plot: no language data")
+        return
+    fig, axes = plt.subplots(1, len(langs), figsize=(6.5 * len(langs), 5.5))
+    if len(langs) == 1:
         axes = [axes]
-    for ax, lang in zip(axes, LANGS):
+    for ax, lang in zip(axes, langs):
         sub = summary[summary["lang"] == lang].set_index("model").reindex(MODELS)
         x = np.arange(len(MODELS))
         w = 0.2
@@ -158,10 +178,14 @@ def plot_system_level(df: pd.DataFrame) -> None:
 def plot_per_tag(df: pd.DataFrame, metric: str, fname: str) -> None:
     """Per (lang, phenomenon): with-X bars colored by model, with delta vs without-X annotated."""
     breakdown = per_tag(df, metric)
-    fig, axes = plt.subplots(1, len(LANGS), figsize=(7 * len(LANGS), 5.5))
-    if len(LANGS) == 1:
+    langs = langs_in(df)
+    if not langs:
+        print(f"Skipping per-tag plot ({metric}): no language data")
+        return
+    fig, axes = plt.subplots(1, len(langs), figsize=(7 * len(langs), 5.5))
+    if len(langs) == 1:
         axes = [axes]
-    for ax, lang in zip(axes, LANGS):
+    for ax, lang in zip(axes, langs):
         phenomena = PHENOMENA[lang]
         x = np.arange(len(phenomena))
         w = 0.2
@@ -216,7 +240,7 @@ def plot_cross_task(df_mt: pd.DataFrame) -> None:
         return
 
     rows = []
-    for lang in LANGS:
+    for lang in langs_in(df_mt):
         if lang not in QA_NATIVE_DATASET:
             continue  # No QA pilot data for this language (e.g., French)
         for ph in PHENOMENA[lang]:
@@ -255,9 +279,9 @@ def plot_cross_task(df_mt: pd.DataFrame) -> None:
     df = pd.DataFrame(rows)
 
     fig, ax = plt.subplots(figsize=(10, 7))
-    markers = {"id": "o", "sw": "^"}
+    markers = {"id": "o", "sw": "^", "fr": "s"}
     for ml in MODELS:
-        for lang in LANGS:
+        for lang in langs_in(df_mt):
             sub = df[(df["model"] == ml) & (df["lang"] == lang)]
             if sub.empty:
                 continue

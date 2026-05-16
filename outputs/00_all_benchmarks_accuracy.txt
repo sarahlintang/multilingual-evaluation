@@ -19,14 +19,14 @@ ALL BENCHMARKS — Indonesian + Swahili (native + translated)
  squad_id   openbook    gemini_3_pro 499        93.4
  squad_id   openbook  gemma_4_31b_it 499        93.2
  squad_id   openbook     llama_31_8b 499        85.4
-tydiqa_sw closedbook deepseek_v4_pro 500        62.8
-tydiqa_sw closedbook    gemini_3_pro 500        64.0
-tydiqa_sw closedbook  gemma_4_31b_it 500        51.4
-tydiqa_sw closedbook     llama_31_8b 500        27.0
-tydiqa_sw   openbook deepseek_v4_pro 500        83.8
-tydiqa_sw   openbook    gemini_3_pro 500        88.2
-tydiqa_sw   openbook  gemma_4_31b_it 500        85.4
-tydiqa_sw   openbook     llama_31_8b 500        72.2
+tydiqa_sw closedbook deepseek_v4_pro 496        63.3
+tydiqa_sw closedbook    gemini_3_pro 496        64.5
+tydiqa_sw closedbook  gemma_4_31b_it 496        51.8
+tydiqa_sw closedbook     llama_31_8b 496        27.2
+tydiqa_sw   openbook deepseek_v4_pro 496        84.5
+tydiqa_sw   openbook    gemini_3_pro 496        88.9
+tydiqa_sw   openbook  gemma_4_31b_it 496        86.1
+tydiqa_sw   openbook     llama_31_8b 496        72.8
  squad_sw closedbook deepseek_v4_pro 498        42.8
  squad_sw closedbook    gemini_3_pro 498        52.8
  squad_sw closedbook  gemma_4_31b_it 498        30.7
@@ -41,5 +41,5 @@ Tagged items per dataset:
 
   IndoQA (ID native)                         n_tagged=500
   SQuAD-ID (ID translated)                   n_tagged=499
-  TyDi QA (SW native)                        n_tagged=500
+  TyDi QA (SW native)                        n_tagged=496
   SQuAD-SW (SW translated)                   n_tagged=498

@@ -1,0 +1,384 @@
+========================================================================
+ALL BENCHMARKS — Indonesian + Swahili (native + translated)
+========================================================================
+
+  dataset  condition           model   n  accuracy_%
+   indoqa closedbook deepseek_v4_pro 500        47.8
+   indoqa closedbook    gemini_3_pro 500        52.6
+   indoqa closedbook  gemma_4_31b_it 500        35.2
+   indoqa closedbook     llama_31_8b 500        11.4
+   indoqa   openbook deepseek_v4_pro 500        93.2
+   indoqa   openbook    gemini_3_pro 500        94.6
+   indoqa   openbook  gemma_4_31b_it 500        95.0
+   indoqa   openbook     llama_31_8b 500        88.2
+ squad_id closedbook deepseek_v4_pro 499        47.1
+ squad_id closedbook    gemini_3_pro 499        54.7
+ squad_id closedbook  gemma_4_31b_it 499        33.5
+ squad_id closedbook     llama_31_8b 499        13.2
+ squad_id   openbook deepseek_v4_pro 499        93.0
+ squad_id   openbook    gemini_3_pro 499        93.4
+ squad_id   openbook  gemma_4_31b_it 499        93.2
+ squad_id   openbook     llama_31_8b 499        85.4
+tydiqa_sw closedbook deepseek_v4_pro 496        63.3
+tydiqa_sw closedbook    gemini_3_pro 496        64.5
+tydiqa_sw closedbook  gemma_4_31b_it 496        51.8
+tydiqa_sw closedbook     llama_31_8b 496        27.2
+tydiqa_sw   openbook deepseek_v4_pro 496        84.5
+tydiqa_sw   openbook    gemini_3_pro 496        88.9
+tydiqa_sw   openbook  gemma_4_31b_it 496        86.1
+tydiqa_sw   openbook     llama_31_8b 496        72.8
+ squad_sw closedbook deepseek_v4_pro 498        42.8
+ squad_sw closedbook    gemini_3_pro 498        52.8
+ squad_sw closedbook  gemma_4_31b_it 498        30.7
+ squad_sw closedbook     llama_31_8b 498         8.6
+ squad_sw   openbook deepseek_v4_pro 498        92.6
+ squad_sw   openbook    gemini_3_pro 498        93.6
+ squad_sw   openbook  gemma_4_31b_it 498        93.6
+ squad_sw   openbook     llama_31_8b 498        71.5
+
+------------------------------------------------------------------------
+Tagged items per dataset:
+
+  IndoQA (ID native)                         n_tagged=500
+  SQuAD-ID (ID translated)                   n_tagged=499
+  TyDi QA (SW native)                        n_tagged=496
+  SQuAD-SW (SW translated)                   n_tagged=498
+
+Wrote combined charts + summary to outputs/00_*.png and 00_all_benchmarks_accuracy.txt
+
+
+##### Indonesian #####
+
+================================================================
+COVERAGE REPORT — Indonesian
+================================================================
+
+IndoQA (native)  (n=500)
+----------------------------------------
+Linguistic phenomena (% of items):
+  voice_meN                39  (  7.8%)
+  voice_di                 74  ( 14.8%)
+  reduplication             6  (  1.2%)
+  complex_NP_yang          90  ( 18.0%)
+  none                    326  ( 65.2%)
+Paraphrase distance:
+  literal_match           209  ( 41.8%)
+  paraphrase              283  ( 56.6%)
+  requires_inference        8  (  1.6%)
+Domain:
+  indonesian_history      209  ( 41.8%)
+  indonesian_geography     30  (  6.0%)
+  general                 261  ( 52.2%)
+
+SQuAD-ID (Gemini translated)  (n=499)
+----------------------------------------
+Linguistic phenomena (% of items):
+  voice_meN                32  (  6.4%)
+  voice_di                 65  ( 13.0%)
+  reduplication             4  (  0.8%)
+  complex_NP_yang          84  ( 16.8%)
+  none                    341  ( 68.3%)
+Paraphrase distance:
+  literal_match           166  ( 33.3%)
+  paraphrase              317  ( 63.5%)
+  requires_inference       16  (  3.2%)
+Domain:
+  indonesian_history        1  (  0.2%)
+  indonesian_geography      3  (  0.6%)
+  general                 495  ( 99.2%)
+================================================================
+ACCURACY (aggregate) — Indonesian
+================================================================
+
+ dataset  condition           model   n  accuracy_%
+  indoqa closedbook deepseek_v4_pro 500        47.8
+  indoqa closedbook    gemini_3_pro 500        52.6
+  indoqa closedbook  gemma_4_31b_it 500        35.2
+  indoqa closedbook     llama_31_8b 500        11.4
+  indoqa   openbook deepseek_v4_pro 500        93.2
+  indoqa   openbook    gemini_3_pro 500        94.6
+  indoqa   openbook  gemma_4_31b_it 500        95.0
+  indoqa   openbook     llama_31_8b 500        88.2
+squad_id closedbook deepseek_v4_pro 499        47.1
+squad_id closedbook    gemini_3_pro 499        54.7
+squad_id closedbook  gemma_4_31b_it 499        33.5
+squad_id closedbook     llama_31_8b 499        13.2
+squad_id   openbook deepseek_v4_pro 499        93.0
+squad_id   openbook    gemini_3_pro 499        93.4
+squad_id   openbook  gemma_4_31b_it 499        93.2
+squad_id   openbook     llama_31_8b 499        85.4
+
+================================================================
+Sliced by phenomenon — Indonesian native open-book (indoqa)
+================================================================
+
+                 no_voice_meN  has_voice_meN  delta_voice_meN
+model                                                        
+deepseek_v4_pro          92.8           97.4              4.6
+gemini_3_pro             94.4           97.4              3.0
+gemma_4_31b_it           94.8           97.4              2.6
+llama_31_8b              87.6           94.9              7.3
+
+                 no_voice_di  has_voice_di  delta_voice_di
+model                                                     
+deepseek_v4_pro         93.2          93.2             0.0
+gemini_3_pro            94.4          95.9             1.5
+gemma_4_31b_it          94.8          95.9             1.1
+llama_31_8b             88.3          87.8            -0.5
+
+                 no_reduplication  has_reduplication  delta_reduplication
+model                                                                    
+deepseek_v4_pro              93.1              100.0                  6.9
+gemini_3_pro                 94.5              100.0                  5.5
+gemma_4_31b_it               94.9              100.0                  5.1
+llama_31_8b                  88.1              100.0                 11.9
+
+                 no_complex_NP_yang  has_complex_NP_yang  delta_complex_NP_yang
+model                                                                          
+deepseek_v4_pro                93.2                 93.3                    0.1
+gemini_3_pro                   94.4                 95.6                    1.2
+gemma_4_31b_it                 95.4                 93.3                   -2.1
+llama_31_8b                    88.3                 87.8                   -0.5
+
+================================================================
+Sliced by paraphrase_distance — Indonesian native open-book (indoqa)
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+deepseek_v4_pro               96.2        92.2                50.0
+gemini_3_pro                  97.1        94.0                50.0
+gemma_4_31b_it                97.6        94.3                50.0
+llama_31_8b                   93.3        85.9                37.5
+
+================================================================
+Sliced by domain — Indonesian native open-book (indoqa)
+================================================================
+
+domain           general  indonesian_geography  indonesian_history
+model                                                             
+deepseek_v4_pro     92.0                 100.0                93.8
+gemini_3_pro        93.5                 100.0                95.2
+gemma_4_31b_it      94.6                 100.0                94.7
+llama_31_8b         87.0                  96.7                88.5
+
+================================================================
+Sliced by phenomenon — Indonesian translated open-book (squad_id)
+================================================================
+
+                 no_voice_meN  has_voice_meN  delta_voice_meN
+model                                                        
+deepseek_v4_pro          92.9           93.8              0.9
+gemini_3_pro             93.1           96.9              3.8
+gemma_4_31b_it           93.4           90.6             -2.8
+llama_31_8b              85.0           90.6              5.6
+
+                 no_voice_di  has_voice_di  delta_voice_di
+model                                                     
+deepseek_v4_pro         93.3          90.8            -2.5
+gemini_3_pro            93.8          90.8            -3.0
+gemma_4_31b_it          93.1          93.8             0.7
+llama_31_8b             85.5          84.6            -0.9
+
+                 no_reduplication  has_reduplication  delta_reduplication
+model                                                                    
+deepseek_v4_pro              92.9              100.0                  7.1
+gemini_3_pro                 93.3              100.0                  6.7
+gemma_4_31b_it               93.1              100.0                  6.9
+llama_31_8b                  85.3              100.0                 14.7
+
+                 no_complex_NP_yang  has_complex_NP_yang  delta_complex_NP_yang
+model                                                                          
+deepseek_v4_pro                93.3                 91.7                   -1.6
+gemini_3_pro                   93.5                 92.9                   -0.6
+gemma_4_31b_it                 93.7                 90.5                   -3.2
+llama_31_8b                    84.8                 88.1                    3.3
+
+================================================================
+Sliced by paraphrase_distance — Indonesian translated open-book (squad_id)
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+deepseek_v4_pro               95.8        92.1                81.2
+gemini_3_pro                  95.8        92.4                87.5
+gemma_4_31b_it                95.8        92.4                81.2
+llama_31_8b                   91.0        82.3                87.5
+
+================================================================
+Sliced by domain — Indonesian translated open-book (squad_id)
+================================================================
+
+domain           general  indonesian_geography  indonesian_history
+model                                                             
+deepseek_v4_pro     92.9                 100.0               100.0
+gemini_3_pro        93.3                 100.0               100.0
+gemma_4_31b_it      93.1                 100.0               100.0
+llama_31_8b         85.3                 100.0               100.0
+
+Wrote id outputs to outputs/id/
+
+
+##### Swahili #####
+
+================================================================
+COVERAGE REPORT — Swahili
+================================================================
+
+TyDi QA Swahili (native)  (n=496)
+----------------------------------------
+Linguistic phenomena (% of items):
+  noun_class_concord      231  ( 46.6%)
+  applicative               0  (  0.0%)
+  passive                  11  (  2.2%)
+  locative_ni              63  ( 12.7%)
+  none                    197  ( 39.7%)
+Paraphrase distance:
+  literal_match           118  ( 23.8%)
+  paraphrase              305  ( 61.5%)
+  requires_inference       73  ( 14.7%)
+Domain:
+  east_african_history     95  ( 19.2%)
+  east_african_geography   75  ( 15.1%)
+  general                 326  ( 65.7%)
+
+SQuAD-SW (Gemini translated)  (n=498)
+----------------------------------------
+Linguistic phenomena (% of items):
+  noun_class_concord      335  ( 67.3%)
+  applicative               1  (  0.2%)
+  passive                  30  (  6.0%)
+  locative_ni              84  ( 16.9%)
+  none                    100  ( 20.1%)
+Paraphrase distance:
+  literal_match           190  ( 38.2%)
+  paraphrase              292  ( 58.6%)
+  requires_inference       16  (  3.2%)
+Domain:
+  east_african_history     63  ( 12.7%)
+  east_african_geography    5  (  1.0%)
+  general                 430  ( 86.3%)
+================================================================
+ACCURACY (aggregate) — Swahili
+================================================================
+
+  dataset  condition           model   n  accuracy_%
+tydiqa_sw closedbook deepseek_v4_pro 496        63.3
+tydiqa_sw closedbook    gemini_3_pro 496        64.5
+tydiqa_sw closedbook  gemma_4_31b_it 496        51.8
+tydiqa_sw closedbook     llama_31_8b 496        27.2
+tydiqa_sw   openbook deepseek_v4_pro 496        84.5
+tydiqa_sw   openbook    gemini_3_pro 496        88.9
+tydiqa_sw   openbook  gemma_4_31b_it 496        86.1
+tydiqa_sw   openbook     llama_31_8b 496        72.8
+ squad_sw closedbook deepseek_v4_pro 498        42.8
+ squad_sw closedbook    gemini_3_pro 498        52.8
+ squad_sw closedbook  gemma_4_31b_it 498        30.7
+ squad_sw closedbook     llama_31_8b 498         8.6
+ squad_sw   openbook deepseek_v4_pro 498        92.6
+ squad_sw   openbook    gemini_3_pro 498        93.6
+ squad_sw   openbook  gemma_4_31b_it 498        93.6
+ squad_sw   openbook     llama_31_8b 498        71.5
+
+================================================================
+Sliced by phenomenon — Swahili native open-book (tydiqa_sw)
+================================================================
+
+                 no_noun_class_concord  has_noun_class_concord  delta_noun_class_concord
+model                                                                                   
+deepseek_v4_pro                   82.6                    86.6                       4.0
+gemini_3_pro                      87.2                    90.9                       3.7
+gemma_4_31b_it                    83.8                    88.7                       4.9
+llama_31_8b                       72.5                    73.2                       0.7
+
+                 no_passive  has_passive  delta_passive
+model                                                  
+deepseek_v4_pro        84.9         63.6          -21.3
+gemini_3_pro           89.1         81.8           -7.3
+gemma_4_31b_it         86.2         81.8           -4.4
+llama_31_8b            73.2         54.5          -18.7
+
+                 no_locative_ni  has_locative_ni  delta_locative_ni
+model                                                              
+deepseek_v4_pro            85.2             79.4               -5.8
+gemini_3_pro               89.4             85.7               -3.7
+gemma_4_31b_it             86.6             82.5               -4.1
+llama_31_8b                72.7             73.0                0.3
+
+================================================================
+Sliced by paraphrase_distance — Swahili native open-book (tydiqa_sw)
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+deepseek_v4_pro               97.5        86.6                54.8
+gemini_3_pro                  99.2        92.8                56.2
+gemma_4_31b_it                99.2        92.1                39.7
+llama_31_8b                   83.1        76.7                39.7
+
+================================================================
+Sliced by domain — Swahili native open-book (tydiqa_sw)
+================================================================
+
+domain           east_african_geography  east_african_history  general
+model                                                                 
+deepseek_v4_pro                    86.7                  88.4     82.8
+gemini_3_pro                       82.7                  88.4     90.5
+gemma_4_31b_it                     86.7                  87.4     85.6
+llama_31_8b                        74.7                  73.7     72.1
+
+================================================================
+Sliced by phenomenon — Swahili translated open-book (squad_sw)
+================================================================
+
+                 no_noun_class_concord  has_noun_class_concord  delta_noun_class_concord
+model                                                                                   
+deepseek_v4_pro                   91.4                    93.1                       1.7
+gemini_3_pro                      93.3                    93.7                       0.4
+gemma_4_31b_it                    93.3                    93.7                       0.4
+llama_31_8b                       74.8                    69.9                      -4.9
+
+                 no_applicative  has_applicative  delta_applicative
+model                                                              
+deepseek_v4_pro            92.6            100.0                7.4
+gemini_3_pro               93.6            100.0                6.4
+gemma_4_31b_it             93.6            100.0                6.4
+llama_31_8b                71.4            100.0               28.6
+
+                 no_passive  has_passive  delta_passive
+model                                                  
+deepseek_v4_pro        92.5         93.3            0.8
+gemini_3_pro           93.2        100.0            6.8
+gemma_4_31b_it         93.6         93.3           -0.3
+llama_31_8b            70.5         86.7           16.2
+
+                 no_locative_ni  has_locative_ni  delta_locative_ni
+model                                                              
+deepseek_v4_pro            93.2             89.3               -3.9
+gemini_3_pro               93.7             92.9               -0.8
+gemma_4_31b_it             94.0             91.7               -2.3
+llama_31_8b                71.5             71.4               -0.1
+
+================================================================
+Sliced by paraphrase_distance — Swahili translated open-book (squad_sw)
+================================================================
+
+paraphrase_distance  literal_match  paraphrase  requires_inference
+model                                                             
+deepseek_v4_pro               95.8        91.4                75.0
+gemini_3_pro                  96.3        92.1                87.5
+gemma_4_31b_it                96.3        92.5                81.2
+llama_31_8b                   78.9        66.8                68.8
+
+================================================================
+Sliced by domain — Swahili translated open-book (squad_sw)
+================================================================
+
+domain           east_african_geography  east_african_history  general
+model                                                                 
+deepseek_v4_pro                   100.0                  93.7     92.3
+gemini_3_pro                      100.0                  85.7     94.7
+gemma_4_31b_it                    100.0                  87.3     94.4
+llama_31_8b                        80.0                  69.8     71.6
+
+Wrote sw outputs to outputs/sw/

@@ -61,10 +61,23 @@ ALL_BENCHMARKS: list[tuple[str, str, str]] = [
 ]
 
 
+# Gold-answer errors discovered via cross-model agreement-vs-gold audit.
+# In each case all four tested models systematically disagreed with the gold;
+# manual review confirmed the gold is wrong (truncation, factual error, or
+# missing information forced into a non-answer).
+QA_GOLD_ERRORS = {
+    "tydiqa_sw_swahili-621776127146134670-2",     # alcohol inventor (Persian Rhazes vs Waislamu)
+    "tydiqa_sw_swahili-8216132447498963245-51",   # Kenya president 1975 (Kenyatta, not Moi)
+    "tydiqa_sw_swahili--8490159616452737784-9",   # hydrogen 1766 (gold truncated to "176")
+    "tydiqa_sw_swahili--7571808641324368696-0",   # # African countries (text gives no number)
+}
+
+
 def load_results() -> list[dict]:
     if not RESULTS.exists():
         return []
-    return [json.loads(line) for line in RESULTS.read_text(encoding="utf-8").splitlines() if line.strip()]
+    items = [json.loads(line) for line in RESULTS.read_text(encoding="utf-8").splitlines() if line.strip()]
+    return [it for it in items if it["id"] not in QA_GOLD_ERRORS]
 
 
 # ---------- Coverage --------------------------------------------------------

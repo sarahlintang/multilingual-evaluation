@@ -1,0 +1,2105 @@
+{
+  "description": "Swahili passive items for manual inspection. `native_wrong` = TyDi QA (native SW) passive items where at least one model answered incorrectly in open-book. `translated_correct` = SQuAD-SW (translated SW) passive items where at least one model answered correctly in open-book. Each item lists per-model open-book predictions plus `wrong_models` / `correct_models`.",
+  "models": [
+    "gemini_3_pro",
+    "deepseek_v4_pro",
+    "gemma_4_31b_it",
+    "llama_31_8b"
+  ],
+  "counts": {
+    "native_wrong": 11,
+    "translated_correct": 30
+  },
+  "native_wrong": [
+    {
+      "id": "tydiqa_sw_swahili--1969776044680536978-2",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Piramidi ilijengwa mwaka gani?",
+      "context": "Makaburi ya kwanza yalijengwa huko tangu chanzo cha milki ya Misri ya Kale takriban miaka 3,000 KK.",
+      "gold": "3,000 KK",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Takriban miaka 3,000 KK.",
+          "verdict": "correct",
+          "reason": "Predicted answer conveys the same factual content about the year.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Samahani, kifungu hakijataja mwaka ambao piramidi ilijengwa. Kimeeleza tu kwamba makaburi ya kwanza yalijengwa karibu 3,000 KK.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the factual content regarding the construction year of the pyramids.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Takriban miaka 3,000 KK.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same timeframe of approximately 3,000 years before Christ.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Takriban 2580 KK",
+          "verdict": "incorrect",
+          "reason": "The predicted answer provides a different date than the gold answer.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "tydiqa_sw_swahili-621776127146134670-2",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Pombe ya kwanza ilitengenezwa na nani?",
+      "context": "Kulingana na wanahistoria Donald Hill na Ahmad Y Al Hassan, utengenezaji wa pombe ulikuwa unajulikana na jamii ya Waislamu hata katika karne ya 18. Watu wa Persian Rhazes ndio wanakisiwa kama waliovumbua pombe aina ya ethanol.",
+      "gold": "Waislamu",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "requires_inference",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Watu wa Persian Rhazes.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not convey the same factual content as the gold answer.",
+          "correct": false
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Watu wa Persian Rhazes",
+          "verdict": "incorrect",
+          "reason": "The predicted answer refers to a specific individual from Persian heritage rather than the broader group specified in the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Watu wa Persian Rhazes.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer attributes the creation of the first alcohol to a specific individual while the gold answer broadly attributes it to a group.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Watatu miongoni mwao.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not convey the same factual content as the gold answer.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "correct_models": [],
+      "n_wrong": 4,
+      "n_correct": 0
+    },
+    {
+      "id": "tydiqa_sw_swahili-8216132447498963245-51",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Rais wa Kenya mwaka 1975 anaitwa nani?",
+      "context": "Mwaka wa 1978, Kenyatta alifariki na Daniel Arap Moi akawa rais. Moi alidumisha urais kwa kuchaguliwa bila kupingwa katika chaguzi za mwaka wa 1979, 1983 (uchaguzi wa dharura) na 1988, zote zikiwa zilifanyika chini ya katiba ya chama kimoja. Uchaguzi wa 1983 ulifanyika mwaka mmoja kabla ya wakati kutokana na njama ya kupindua serikali iliyokosa kufaulu tarehe 1 Agosti 1982.",
+      "gold": "Daniel Arap Moi",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "requires_inference",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Kenyatta",
+          "verdict": "incorrect",
+          "reason": "The predicted answer names the wrong person.",
+          "correct": false
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Jomo Kenyatta",
+          "verdict": "incorrect",
+          "reason": "The predicted answer is not the correct name of the President of Kenya in 1975.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Kenyatta",
+          "verdict": "incorrect",
+          "reason": "The predicted answer is not the correct name of the President of Kenya in 1975.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Kenyatta",
+          "verdict": "incorrect",
+          "reason": "The predicted answer is incorrect; it names the wrong person.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "correct_models": [],
+      "n_wrong": 4,
+      "n_correct": 0
+    },
+    {
+      "id": "tydiqa_sw_swahili--8490159616452737784-9",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Hidrojeni iligunduliwa mwaka gani?",
+      "context": "Jina la Elementi)Kiingereza (IUPAC)AlamaNamba atomiaUzani atomia [u]Densiti [kg/m³] (20°C)Kiwango  cha kuyeyuka (°C)Kiwango  cha kuchemka (°C)Iligunduliwa mwakaKutambuliwa naAktiniactiniumAc89227,0310070104731971899DebierneAluminialuminiumAl1326,982700660,524671825ØrstedAmerikiamericiumAm95243,061367099426071944SeaborgStibiantimonySb51121,756690630,71750zamani(?)ArigoniargonAr1839,941,66 -189,4 −189,4 -185,9 −185,91894Ramsay,  StruttAsenikiarsenicAs3374,925720613 2)6132)11. Jhd.Albertus MagnusAstatiniastatineAt85209,993023371940SegrèBaribariumBa56137,33365072516401808DavyBerkeliberkeliumBk97247,07132509861949SeaborgBeriliberylliumBe49,011850127829701797VauquelinBismuthibismuthBi83208,989800271,415601540AgricolaBoribohriumBh107262,121976OganessianBoroniboriumB510,812460230025501808Davy,  Gay-LussacBromibromineBr 3579,903140 -007,3−7,358,81826BalardKadimicadmiumCd48112,4186403217651817Stromeyer und   HermannSizicesiumCs55132,91190028,46901860Kirchhoff,   BunsenKalisicalciumCa2040,078154083914871808DavyKalifonicaliforniumCf98251,08151009001950SeaborgSericeriumCe58140,11677079832571803von Hisinger, BerzeliusKlorinichlorineCl1735,452,95 -101−101 -034,6 −34,61774ScheeleKromichromiumCr2452,007140185724821797VauquelinKobalticobaltCo2758,9338890149528701735BrandtKuricuriumCm96247,0713510134031101944SeaborgDarmstatidarmstadtiumDs1102691994GSIDubnidubniumDb105262,111967/70GhiorsoDisprosiDisprosiDy66162,58560140923351886Lecoq de BoisbaudranEinsteinieinsteiniumEs99252,088601952SeaborgFeri (chuma) (chuma)ironFe2655,85787015352750zamani(?)ErbierbiumEr68167,269050152225101842MosanderEuropieuropiumEu63151,96525082215971901DemarçayFermifermiumFm100257,101952SeaborgFloriniflourineF919,001,58 -219,6−219,6 -188,1 −188,11886MoissanFransifranciumFr87223,02276771939PereyGadolinigaboliniumGd64157,257890131132331880de MarignacGaligalliumGa3169,72591029,824031875Lecoq de BoisbaudranGermanigermaniumGe3272,615320937,428301886WinklerAuri (dhahabu)goldAu79196,97193201064,42940zamani(?)HafniHf72178,4913310215054001923Coster,   de HevesyHassiHs108265,001984GSIHeliHe24,000,170 -272,2−272,2 -268,9 −268,91895Ramsay,  CrookesHolmi ?holmiumHo67164,938780147027201878SoretHidrojenihydrogenH11,010,084 -259,1 −259,1 -252,9 −252,91766CavendishIndiindiumIn49114,827310156,220801863Reich,  RichterIodiniiodineI53126,904940113,5184,41811CourtoisIridiiridiumIr77192,2222560241041301803TennantKalipotassiumK1939,09886063,77741807DavyKabonicarbonC612,011351035504827zamani(?)KriptonikryptonKr3683,803,48 -156,6−156,6 -152,3−152,31898Ramsay,  TraversKupricopperCu2963,5589201083,52595zamani(?)LanthaniLa57138,90616092034541839MosanderLawirensilawrenciumLr103260,1016271961GhiorsoLithiLi36,94530180,513171817ArfwedsonLutetiLu71175,009840165633151907von Welsbach,  UrbainMagnesiMg1224,301740648,811071828BussyManganisiMn2554,907440124420971774GahnMaitnirimeitneriumMt1092661982GSIMendelevimedeleviumMd101258,11955SeaborgMolibdenimolybdenumMo4295,9410280261755601778ScheeleNatrisodiumNa1122,9997097,88921807DavyNeodimineodynNd60144,247000101031271895von WelsbachNeonineonNe1020,180,84 -248,7 −248,7 -246,1 −246,11898Ramsay  TraversNeptunineptuniumNp93237,052048064039021940McMillan  AbelsonNikelinickelNi2858,698910145327321751CronstedtNiobiniobiumNb4192,918580246849271801HatchetNitrojeninitrogenN714,011,170 -209,9 −209,9 -195,8 −195,81771ScheeleNobelinobeliumNo102259,101958SeaborgOsmiosmiumOs76190,222590304550271803TennantPaladipalladiumPd46106,4212020155231401803WollastonPlumbileadPb82207,211340327,51740zamani(?)PosforiphosphorusP1530,971820442801669BrandPlatiniplatiniumPt78195,0821450177238271557ScaligerPlutoniplutoniumPu94244,061974064133271940SeaborgPolonipoloniumPo84208,9892002549621898Marie CuriePraseodimipraseodymiumPr59140,91648093132121895von WelsbachPromethipromethiumPm61146,927220108027301945MarinskyProtaktiniprotactiniumPa91231,0415370155440301917Fajans  Hahn,  MeitnerHidrajirimercuryHg80200,5913550 -038,9 −38,9356,6zamani(?)Radi (elementi)radiumRa88226,03550070011401898Marie und  Pierre CurieRadoniradonRn86222,029,23 -071 −71 -061,8 −61,81900DornRenirheniumRe75186,2121030318056271925Noddack,  Tacke,  BergRodirhodiumRh45102,9112410196637271803WollastonRentgeniRg1112721994GSIRubidiRb3785,451530396881861Bunsen,  KirchhoffRutheniRu44101,0712450231039001844ClausRutherfordiRf104261,111964/69GhiorsoSamariSm62150,367540107217781879Lecoq de BoisbaudranOksijenioxygenO816,001,33 -218,4 −218,4 -182,9 −182,91774Priestley,  ScheeleSkandiscandiumSc2144,962990153928321879NilsonSulfurisulfurS1632,072060113444,7zamani(?)SiborgiseaborgiumSg106263,121974OganessianSeleniSe3478,9648202176851817BerzeliusAgentisilverAg47107,8710490961,92212zamani(?)SilikonisiliconSi1428,092330141023551824BerzeliusStanitinSn50118,7172902322270zamani(?)StrontistrontiumSr3887,62263076913841798KlaprothTantalitantalumTa73180,9516680299654251802EkebergTekinetitechnetiumTc4398,9111490217250301937SegrèTelurotelluriumTe52127,66250449,69901782von ReichensteinTaribiterbiumTb65158,938250136030411843MosanderTalithalliumTl81204,3811850303,614571861CrookesThorithoriumTh90232,0411720175047871829BerzeliusThulithuliumTm69168,939320154517271879CleveTitanititaniumTi2247,884510166032601791Gregor,  KlaprothUnunbiununbiumUub1122771996GSIUnunheksiununhexiumUuh1162892000JINRUnunoktiununoctiumUuo1182932006JINRUnunpentiununpentiumUup1152882006JINRUnunkadiununquadiumUuq1142891999JINRUnuntriununtriumUut1132872006JINRUraniuraniumU92238,03189701132,438181789KlaprothVanadivanadiumV2350,946090189033801801del RíoWolframitungstenW74183,8519260340759271783Fausto und Juan  de ElhuyarYitebiytterbiumYb70173,04697082411931878de MarignacYitriyttriumY3988,914470152333371794GadolinZinkizincZn3065,397140419,6907zamani(?)ZenonixenonXe54131,294,49 -111,9 −111,9 -107,0 −1071898Ramsay,   TraversZirikonizirconiumZr4091,226510185243771789Klaproth",
+      "gold": "176",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "1766",
+          "verdict": "incorrect",
+          "reason": "The predicted answer has an incorrect year compared to the gold answer.",
+          "correct": false
+        },
+        "deepseek_v4_pro": {
+          "prediction": "1766",
+          "verdict": "incorrect",
+          "reason": "The predicted answer represents a different year than the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "1766",
+          "verdict": "incorrect",
+          "reason": "The predicted answer differs from the gold answer by a factor of 10.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "1766",
+          "verdict": "incorrect",
+          "reason": "The predicted answer is not the same as the gold answer due to a difference in the year.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "correct_models": [],
+      "n_wrong": 4,
+      "n_correct": 0
+    },
+    {
+      "id": "tydiqa_sw_swahili--7571808641324368696-0",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Je, lugha ya Swahili inazungumziwa na nchi ngapi bara Afrika?",
+      "context": "Kiswahili ni lugha ya Kibantu yenye misamiati mingi ya Kiarabu (30%), lakini sasa ya Kiingereza pia (10%), inayozungumzwa katika eneo kubwa la Afrika ya Mashariki.",
+      "gold": "eneo kubwa la Afrika ya Mashariki",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_geography"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Kifungu hakitaji idadi ya nchi.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not provide information about the number of countries speaking Swahili.",
+          "correct": false
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Samahani, kifungu hakijataja idadi ya nchi zinazozungumza Kiswahili.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not provide the same factual content as the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Kifungu hakitaja idadi ya nchi.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not provide a relevant factual response to the question.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Mgawanyiko wa lugha hii nchini 13 ya Jumuiya ya Afrika ya Mashariki",
+          "verdict": "incorrect",
+          "reason": "The predicted answer specifies a number and mentions a specific community, rather than summarizing the broader region where Swahili is spoken.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "correct_models": [],
+      "n_wrong": 4,
+      "n_correct": 0
+    },
+    {
+      "id": "tydiqa_sw_swahili-3274102485524185629-2",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Hoteli ya Cairo Marriott ilijengwa na nani?",
+      "context": "Ikulu ya awali ilijengwa na Nile kufuatia amri ya Khedive Ismail. Aliwataka maakitekta wa enzi hizo kuifanya kufanana na ikulu na ikulu nyingine Ufaransa, Versailles, ambapo Empress Eugénie alikuwa akikaa . Kusudi ya ikulu ilikuwa kumkaribisha Empress wa Kifaransa Eugénie ambaye alikuwa amealikwa pamoja na mumewe ,Kaisari wa Ufaransa  Napoleon. Tukio la mwaliko huo ilikuwa ufunguzi wa Suez ambao ulikuwa mradi mkubwa wakati huo.",
+      "gold": "Nile",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Khedive Ismail",
+          "verdict": "incorrect",
+          "reason": "The predicted answer identifies a person instead of the location.",
+          "correct": false
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Khedive Ismail",
+          "verdict": "incorrect",
+          "reason": "The predicted answer provides a specific name while the gold answer provides a location.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Kifungu hakijataja Hoteli ya Cairo Marriott.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not provide the information requested about who built the Cairo Marriott Hotel.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Khedive Ismail",
+          "verdict": "incorrect",
+          "reason": "The predicted answer refers to a specific person associated with the hotel, while the gold answer refers to a location.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "correct_models": [],
+      "n_wrong": 4,
+      "n_correct": 0
+    },
+    {
+      "id": "tydiqa_sw_swahili-4579106273575644145-3",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Mnara wa Eiffel ulitengenezwa mwaka upi?",
+      "context": "Mnara huu ulijengwa kando ya mto Seine miaka 1887 hadi 1889 kama geti la Maonyesho ya Dunia ya mwaka 1889.",
+      "gold": "1887 hadi 1889",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "1887 hadi 1889.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "1889",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not encompass the full range of years provided in the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Miaka 1887 hadi 1889.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content regarding the years of construction.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Mnara wa Eiffel ulitengenezwa mwaka 1887 hadi 1889.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [
+        "deepseek_v4_pro"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "tydiqa_sw_swahili--7904458900454854637-0",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Marc Predka alizaliwa wapi?",
+      "context": "Marc Predka (aliyezaliwa 21 Aprili 1975), ambaye anajilikana kwa jina la kisanii kama Tha Trademarc, ni mwanamuziki wa Rap kutoka Marekani. Mara ya kwanza kujulikana kwa umaarufu ilikuwa wakati yeye na binamu yake wa kwanza mwanamiereka wa WWE John Cena walishirikiana mnamo 2005 kutoa albamu You Can't See Me[1]. Pia anaonekana katika video za nyimbo , ‘’Bad Bad Man’’ na ‘’Right Now’’ ambazo amefanya na John Cena. Leo hii yeye hufanya kazi katika kitengo cha elimu ya waiosjiweza katika Shule ya Maynard kule Maynard, Massachusetts.",
+      "gold": "Marekani",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Marekani.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer with no significant differences.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Haijatajwa mahali alipozaliwa.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not provide the location of birth as required.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Marekani.",
+          "verdict": "correct",
+          "reason": "Predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Marekani.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [
+        "deepseek_v4_pro"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "tydiqa_sw_swahili-2781687307780680380-1",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Chama cha  Orange Democratic Movement Party of Kenya kilianzishwa na nani?",
+      "context": "ODM ilianzishwa na chama cha Uhuru Kenyatta, KANU na chama cha Raila Odinga, LDP, lakini chama cha KANU kiliweza kujiondoa, na waliobaki waligawanyika katika makundi haya mawili yanayoongozwa na Raila Odinga (ODM; ndio wengi zaidi) na Kalonzo Musyoka (ODM-Kenya). Sababu ya farakano ilikuwa suala la nani atakuwa mgombea wa urais upande wa ODM.",
+      "gold": "chama cha Uhuru Kenyatta, KANU na chama cha Raila Odinga, LDP",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Chama cha Uhuru Kenyatta (KANU) na chama cha Raila Odinga (LDP).",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer with slight paraphrasing.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "KANU na LDP.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer omits the mention of Uhuru Kenyatta and does not fully represent the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Chama cha Uhuru Kenyatta (KANU) na chama cha Raila Odinga (LDP).",
+          "verdict": "correct",
+          "reason": "Both answers mention the same parties and individuals.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "KANU na LDP",
+          "verdict": "incorrect",
+          "reason": "The predicted answer omits the mention of Uhuru Kenyatta and does not fully convey the founding elements of the party.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "deepseek_v4_pro",
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 2,
+      "n_correct": 2
+    },
+    {
+      "id": "tydiqa_sw_swahili-3160180495346960398-2",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "FORD-Asili ilianzishwa na nani?",
+      "context": "Kabla ya uchaguzi wa 1992 FORD ilifarakana kati ya wafuasi wa viongozi Kenneth Matiba kutoka Mkoa wa Kati na Martin Shikuku kutoka Mkoa wa Magharibi kwa upande mmoja na kwa upande mwingine Jaramogi Oginga Odinga kutoka Mkoa wa Nyanza.  Wafuasi wa Odinga waliunda FORD-Kenya. Wafuasi wa Matiba waliendelea kwa jina la FORD-Asili.",
+      "gold": "Kenneth Matiba",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Wafuasi wa Matiba.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer does not specify the founder but refers to Matiba's supporters.",
+          "correct": false
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Kenneth Matiba",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Wafuasi wa Kenneth Matiba.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer includes additional information about followers, which alters the factual content.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Wafuasi wa Kenneth Matiba.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer refers to followers rather than the founder.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "gemini_3_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "deepseek_v4_pro"
+      ],
+      "n_wrong": 3,
+      "n_correct": 1
+    },
+    {
+      "id": "tydiqa_sw_swahili-7918510720689031582-4",
+      "dataset": "tydiqa_sw",
+      "lang": "sw",
+      "question": "Kamusi ya kiswahili iliandikwa mwaka gani?",
+      "context": "Kamusi ya kwanza inayojulikana ilitungwa mnamo 1848 na Ludwig Krapf huko Rabai Mpya / Mombasa (Kenya); ilikamilishwa na kutolewa kama \"A Dictionary of the Suahili language, London 1882\".[1] Kamusi inapatikana pia mtandaoni[2].",
+      "gold": "1848",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "1848",
+          "verdict": "correct",
+          "reason": "Both answers provide the same year, 1848.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "1848",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "1848",
+          "verdict": "correct",
+          "reason": "Predicted answer matches the factual content of the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "1882",
+          "verdict": "incorrect",
+          "reason": "The predicted answer provides a different year than the gold answer.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    }
+  ],
+  "translated_correct": [
+    {
+      "id": "squad_sw_572a1bcf3f37b319004786dc",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni rangi gani ilitengenezwa kwa kuloweka mabamba ya shaba kwenye divai inayochacha?",
+      "context": "Warumi walikuwa na uthamini mkubwa zaidi kwa rangi ya kijani; ilikuwa rangi ya Venus, mungu wa kike wa bustani, mbogamboga na mashamba ya mizabibu. Warumi walitengeneza rangi nzuri ya kijani ya udongo, ambayo ilitumiwa sana katika michoro ya kuta huko Pompeii, Herculaneum, Lyon, Vaison-la-Romaine, na miji mingine ya Kirumi. Pia walitumia rangi ya verdigris, iliyotengenezwa kwa kuloweka mabamba ya shaba kwenye divai inayochacha. Kufikia karne ya pili BK, Warumi walikuwa wakitumia rangi ya kijani katika michoro, mozaiki na vioo, na kulikuwa na maneno kumi tofauti katika Kilatini kwa ajili ya aina mbalimbali za kijani.",
+      "gold": "verdigris",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Verdigris",
+          "verdict": "correct",
+          "reason": "The predicted answer is an exact case variation of the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Verdigris.",
+          "verdict": "correct",
+          "reason": "The predicted answer is a correct representation of the gold answer despite capitalization differences.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Rangi ya verdigris.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Rangi ya verdigris",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_56e10dbdcd28a01900c674e4",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni nani aliyebuni mfumo wa urambazaji wa COMPASS?",
+      "context": "Ishara za upimaji wa masafa zinategemea kanuni ya CDMA na zina muundo tata unaofanana na ule wa Galileo au GPS ya kisasa. Sawa na mifumo mingine ya GNSS, kutakuwa na ngazi mbili za huduma za utambuzi wa mahali: huduma ya wazi na ile iliyozuiliwa (kijeshi). Huduma ya umma itapatikana duniani kote kwa watumiaji wa kawaida. Mifumo yote ya sasa ya GNSS iliyopangwa itakapokamilika, watumiaji watafaidika na matumizi ya jumla ya zaidi ya satelaiti 75, jambo ambalo litaboresha kwa kiasi kikubwa nyanja zote za utambuzi wa mahali, hasa upatikanaji wa ishara katika maeneo ya mijini yenye majengo marefu yanayoziba mawasiliano. Mbunifu mkuu wa mfumo wa urambazaji wa COMPASS ni Sun Jiadong, ambaye pia ni mbunifu mkuu wa mtangulizi wake, mfumo wa asili wa urambazaji wa BeiDou.",
+      "gold": "Sun Jiadong",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Sun Jiadong",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Sun Jiadong",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Sun Jiadong",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Mivingani Jiadong.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer contains a different first name.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "squad_sw_5731405b497a881900248cf9",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni serikali gani iliyopigania kupigwa marufuku kwa LED za Daraja la 2?",
+      "context": "Idadi kubwa ya vifaa vyenye LED ni \"salama chini ya hali zote za matumizi ya kawaida\", na hivyo huainishwa kama \"bidhaa ya LED ya Daraja la 1\". Kwa sasa, ni LED chache tu—LED zinazong'aa sana ambazo pia zina pembe finyu ya mwonekano ya 8° au chini ya hapo—ambazo, kinadharia, zinaweza kusababisha upofu wa muda, na hivyo huainishwa kama \"Daraja la 2\". Maoni ya Shirika la Ufaransa la Chakula, Mazingira na Afya na Usalama Kazini (ANSES) ya mwaka 2010, kuhusu masuala ya afya yanayohusu LED, yalipendekeza kupiga marufuku matumizi ya umma ya taa zilizokuwa katika Kundi la Hatari la wastani la 2, hasa zile zenye kiwango kikubwa cha mwanga wa bluu katika maeneo yanayotembelewa na watoto. Kwa ujumla, kanuni za usalama wa leza—na mfumo wa \"Daraja la 1\", \"Daraja la 2\", n.k.—pia hutumika kwa LED.",
+      "gold": "Ufaransa",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "noun_class_concord"
+        ],
+        "paraphrase_distance": "requires_inference",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Ufaransa.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Ufaransa.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Hakuna serikali iliyotajwa; ni Shirika la Ufaransa la Chakula, Mazingira na Afya na Usalama Kazini (ANSES).",
+          "verdict": "incorrect",
+          "reason": "The predicted answer mentions an organization instead of the government that fought for the ban.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Serikali ya Ufaransa, kwa Shirika la Ufaransa la Chakula, Mazingira na Afya na Usalama Kazini (ANSES).",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [
+        "gemma_4_31b_it"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "llama_31_8b"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "squad_sw_570db36a16d0071400510d03",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni maeneo gani ya utumishi wa umma ambapo Waeritrea waliajiriwa hasa?",
+      "context": "Mnamo mwaka wa 1888, utawala wa Kiitaliano ulianzisha miradi yake ya kwanza ya maendeleo katika koloni hilo jipya. Reli ya Eritrea ilikamilika hadi Saati mnamo 1888, na kufika Asmara katika nyanda za juu mnamo 1911. Kamba ya usafirishaji ya Asmara–Massawa ilikuwa njia ndefu zaidi duniani wakati huo, lakini baadaye ilibomolewa na Waingereza wakati wa Vita vya Pili vya Dunia. Kando na miradi mikubwa ya miundombinu, mamlaka za kikoloni ziliwekeza kwa kiasi kikubwa katika sekta ya kilimo. Pia ilisimamia utoaji wa huduma za mijini huko Asmara na Massawa, na kuwaajiri Waeritrea wengi katika utumishi wa umma, hasa katika idara za polisi na kazi za umma. Maelfu ya Waeritrea walisajiliwa jeshini kwa wakati mmoja, wakitumikia wakati wa Vita vya Italo-Turkish huko Libya pamoja na Vita vya Kwanza na vya Pili vya Italo-Abyssinian.",
+      "gold": "idara za polisi na kazi za umma",
+      "tags": {
+        "linguistic_phenomena": [
+          "locative_ni",
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Idara za polisi na kazi za umma.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Polisi na kazi za umma.",
+          "verdict": "correct",
+          "reason": "Both answers refer to police and public work, conveying the same factual content.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Idara za polisi na kazi za umma.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Idara ya polisi na idara za umma.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_572f6be0947a6a140053c939",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Taarifa huhifadhiwaje katika mfumo wa urambazaji?",
+      "context": "Kwa mfano, matumizi ya kawaida ya mfumo wa hifadhidata ni kufuatilia taarifa kuhusu watumiaji, majina yao, taarifa za kuingia kwenye mfumo, anuani mbalimbali na namba za simu. Katika mfumo wa urambazaji (navigational approach), data hizi zote huwekwa kwenye rekodi moja, na vitu ambavyo havitumiki huachwa bila kuwekwa kwenye hifadhidata. Katika mfumo wa uhusiano (relational approach), data hurekebishwa na kugawanywa katika jedwali la mtumiaji, jedwali la anuani na jedwali la namba za simu (kwa mfano). Rekodi huundwa katika majedwali haya ya hiari ikiwa tu anuani au namba za simu zimetolewa kweli.",
+      "gold": "kwenye rekodi moja",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Data zote huwekwa kwenye rekodi moja.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content about data being stored in a single record.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Data zote huwekwa kwenye rekodi moja, na vitu ambavyo havitumiki huachwa bila kuwekwa kwenye hifadhidata.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer includes additional information that is not present in the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Data zote huwekwa kwenye rekodi moja.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content about data being stored in a single record.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Ninajibu kwa ufupi: Huwekwa kwenye rekodi moja.",
+          "verdict": "correct",
+          "reason": "Both answers convey that the information is stored in a single record.",
+          "correct": true
+        }
+      },
+      "wrong_models": [
+        "deepseek_v4_pro"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "squad_sw_5726a450f1498d1400e8e5c4",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni aina gani nyingine ya usanifu iliyotumia pia tao lenye ncha kali?",
+      "context": "Tao lenye ncha kali, mojawapo ya sifa bainifu za mtindo wa Gothic, hapo awali lilijumuishwa katika usanifu wa Kiislamu kufuatia ushindi wa Kiislamu katika maeneo ya Syria ya Kirumi na Milki ya Sassanid katika karne ya saba. Tao lenye ncha kali na watangulizi wake vilikuwa vimetumika katika usanifu wa Kirumi wa Marehemu na wa Sassanid; ndani ya muktadha wa Kirumi, hii inathibitishwa katika ujenzi wa makanisa ya mapema nchini Syria na majengo ya hapa na pale yasiyo ya kidini, kama vile Daraja la Karamagara la Kirumi; katika usanifu wa Sassanid, katika matao ya parabola na yenye ncha kali yaliyotumiwa katika ujenzi wa majumba ya kifalme na majengo matakatifu.",
+      "gold": "usanifu wa Sassanid",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Usanifu wa Kiislamu, Kirumi wa Marehemu, na Sassanid.",
+          "verdict": "correct",
+          "reason": "The predicted answer includes 'Sassanid', which matches the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Usanifu wa Kirumi na usanifu wa Sassanid.",
+          "verdict": "correct",
+          "reason": "The predicted answer includes the correct gold answer along with additional relevant information.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Usanifu wa Kirumi wa Marehemu na wa Sassanid.",
+          "verdict": "correct",
+          "reason": "The predicted answer includes Sassanid architecture, which aligns with the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Usanifu wa Sassanid",
+          "verdict": "correct",
+          "reason": "Predicted answer is a direct match with the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_572abb93be1ee31400cb81e7",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Kwa nini Brooke alikuwa anachunguzwa?",
+      "context": "Mnamo Januari 1977, Droney alimpandisha cheo kuwa Msaidizi wa Kwanza wa Mwanasheria wa Wilaya, jambo ambalo kimsingi lilimfanya Kerry kuwa mwakilishi wake wa kampeni na vyombo vya habari kwa sababu Droney alikuwa anasumbuliwa na ugonjwa wa amyotrophic lateral sclerosis (ALS, au Ugonjwa wa Lou Gehrig). Kama Msaidizi wa Kwanza, Kerry aliendesha kesi, ambazo ni pamoja na kupata hukumu za hatia katika kesi ya ubakaji iliyopata umaarufu mkubwa na kesi ya mauaji. Pia alishiriki katika usimamizi wa ofisi hiyo, ikiwa ni pamoja na kuanzisha vitengo maalum vya uhalifu wa kiuchumi na uhalifu wa kupangwa, kuanzisha programu za kushughulikia matatizo ya waathiriwa na mashahidi wa ubakaji na uhalifu mwingine, na kusimamia ratiba za kesi ili kuakisi vipaumbele vya kesi. Ilikuwa katika nafasi hii mnamo 1978 ambapo Kerry alitangaza uchunguzi kuhusu uwezekano wa mashtaka ya jinai dhidi ya Seneta wa wakati huo Edward Brooke, kuhusiana na \"maelezo yasiyo ya kweli\" katika kesi yake ya kwanza ya talaka. Uchunguzi huo uliisha bila mashtaka yoyote kufunguliwa baada ya wachunguzi na waendesha mashtaka kubaini kuwa maelezo yasiyo ya kweli ya Brooke yalikuwa yanahusiana na kesi hiyo, lakini hayakuwa na uzito wa kutosha kuathiri matokeo.",
+      "gold": "\"maelezo yasiyo ya kweli\" katika kesi yake ya kwanza ya talaka",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Kuhusiana na \"maelezo yasiyo ya kweli\" katika kesi yake ya kwanza ya talaka.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Brooke alikuwa anachunguzwa kwa sababu ya kutoa maelezo yasiyo ya kweli katika kesi yake ya kwanza ya talaka.",
+          "verdict": "correct",
+          "reason": "The predicted answer accurately conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Kwa sababu ya uwezekano wa mashtaka ya jinai kuhusiana na \"maelezo yasiyo ya kweli\" katika kesi yake ya kwanza ya talaka.",
+          "verdict": "correct",
+          "reason": "Both answers convey that Brooke was being investigated due to false information in her first divorce case.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Alitazamia mashtaka ya jinai kwa kutojumuisha maoni sahihi katika kesi yake ya kwanza ya talaka.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer introduces a different context about criminal charges instead of focusing on the false information regarding the divorce case.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "squad_sw_56e0455c231d4119001ac023",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Konsonanti yenye mpumuo-tangulizi huonyeshwaje?",
+      "context": "Konsonanti zenye mpumuo-tangulizi huonyeshwa kwa kuweka herufi ya kirekebishi mpumuo kabla ya alama ya konsonanti: ⟨ʰp⟩ inawakilisha kizuio cha midomo miwili chenye mpumuo-tangulizi.",
+      "gold": "kuweka herufi ya kirekebishi mpumuo kabla ya alama ya konsonanti",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Kwa kuweka herufi ya kirekebishi mpumuo kabla ya alama ya konsonanti.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Kwa kuweka herufi ya kirekebishi mpumuo kabla ya alama ya konsonanti.",
+          "verdict": "correct",
+          "reason": "The predicted answer accurately reflects the gold answer with minor phrasing differences.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Kwa kuweka herufi ya kirekebishi mpumuo kabla ya alama ya konsonanti.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer with minor wording differences.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Kuweka herufi ya kirekebishi kabla ya alama ya konsonanti.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5726f140f1498d1400e8f09c",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni nani aliyejiimarisha kama Malkia wa Muziki wa Pop?",
+      "context": "Muziki wa Madonna umekuwa mada ya uchambuzi na uchunguzi mwingi. Robert M. Grant, mwandishi wa Contemporary Strategy Analysis (2005), alieleza kuwa kilichomletea Madonna mafanikio \"kwa hakika si kipaji cha asili kilichotukuka. Kama mwimbaji, mwanamuziki, mnenguaji, mtunzi wa nyimbo, au mwigizaji, vipaji vya Madonna vinaonekana kuwa vya wastani.\" Anadai kuwa mafanikio ya Madonna yanatokana na kutegemea vipaji vya wengine, na kwamba mahusiano yake binafsi yamekuwa misingi mikuu ya mabadiliko mengi katika urefu wa kazi yake. Mtazamo wa Madonna ulikuwa mbali na hekima ya tasnia ya muziki isemayo \"Tafuta fomula inayoshinda na uing’ang’anie.\" Kazi yake ya muziki imekuwa majaribio endelevu ya mawazo mapya ya kimuziki na taswira mpya, na jitihada za mara kwa mara za kufikia kilele kipya cha umaarufu na sifa. Grant alihitimisha kuwa \"baada ya kujiimarisha kama malkia wa muziki wa pop, Madonna hakuishia hapo, bali aliendelea kujibadilisha.\" Mwanamuziki Susan McClary aliandika kwamba \"sanaa ya Madonna yenyewe inabomoa mara kwa mara dhana ya kimapokeo ya mhusika mmoja mwenye mipaka maalum ya nafsi. Kazi zake zinachunguza njia mbalimbali za kuunda utambulisho unaokataa utulivu, unaobaki kuwa wenye kubadilika, na unaopinga ufafanuzi wa kudumu.\"",
+      "gold": "Madonna",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Madonna",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Madonna",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Madonna",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Madonna.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_56ddef259a695914005b96e4",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni adhabu gani waliyopewa watu waliofungua nyumba zao kwa ajili ya ibada za Kikatoliki katika mji wa Leiden wakati wa karne ya 17?",
+      "context": "Wakati wa Jamhuri, mtu yeyote aliyetaka kushika nafasi ya umma alipaswa kufuata Kanisa la Reformed na kula kiapo kwa ajili hiyo. Kiwango ambacho dini au madhehebu tofauti yaliteswa kilitegemea sana kipindi cha wakati na viongozi wa mkoa au mji. Hapo mwanzo, jambo hili lililenga hasa Wakatoliki wa Roma, ikiwa ndiyo dini ya adui. Katika mji wa Leiden wa karne ya 17, kwa mfano, watu waliofungua nyumba zao kwa ajili ya ibada wangeweza kutozwa faini ya guilders 200 (mshahara wa mwaka mzima wa fundi stadi) na kupigwa marufuku kuingia mjini humo. Pamoja na hayo yote, uhuru wa kidini wa mtu binafsi ulikuwepo na ulikuwa sababu moja – pamoja na sababu za kiuchumi – iliyosababisha uhamiaji mkubwa wa wakimbizi wa kidini kutoka sehemu nyingine za Ulaya.",
+      "gold": "kutozwa faini ya guilders 200 (mshahara wa mwaka mzima wa fundi stadi) na kupigwa marufuku kuingia mjini humo",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Faini ya guilders 200 na kupigwa marufuku kuingia mjini humo.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Walitozwa faini ya guilders 200 na kupigwa marufuku kuingia mjini.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Faini ya guilders 200 na kupigwa marufuku kuingia mjini humo.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Rafiki 200 ya guilders (mshahara wa mwaka mzima wa msigo wa gereza.)",
+          "verdict": "incorrect",
+          "reason": "The predicted answer contains inaccuracies and does not match the gold answer.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "squad_sw_56f6e85b3d8e2e1400e372af",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Kwa kuwa umeandikwa, muziki wa klasiki unaweza kufikia kiwango cha juu cha nini?",
+      "context": "Muziki wa sanaa wa Ulaya unatofautishwa kwa kiasi kikubwa na aina nyingine nyingi za muziki usio wa Ulaya na muziki maarufu kupitia mfumo wake wa uandishi wa noti kwenye mistari (staff notation), uliotumika tangu takriban karne ya 16. Uandishi huu wa noti wa Magharibi hutumiwa na watunzi kuwaelekeza wanamuziki kuhusu sauti (kama vile melodi, besi na/au kodi), mwendo, mdundo na ridhimu za kipande cha muziki. Hii huacha nafasi ndogo kwa mazoea kama vile uboreshaji wa papo hapo (improvisation) na mapambo ya hiari, ambayo husikika mara kwa mara katika muziki wa sanaa usio wa Ulaya na katika mitindo ya muziki maarufu kama vile jazz na blues. Tofauti nyingine ni kwamba wakati mitindo mingi maarufu hujikita zaidi katika mfumo wa nyimbo, muziki wa klasiki umejulikana kwa ukuzaji wa aina za kisasa sana za muziki wa ala kama vile konserto, simfoni, sonata, na mitindo mchanganyiko ya sauti na ala kama vile opera ambayo, kwa kuwa imeandikwa, inaweza kufikia kiwango cha juu cha utata.",
+      "gold": "utata",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Utata.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer with minor differences in capitalization.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Utata",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Utata.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer, with only a minor difference in capitalization.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "utata.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5728c01f4b864d1900164d52",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni asilimia ngapi ya biashara ya nje ya Estonia iliyokuwa ikishikiliwa na Urusi mnamo mwaka wa 1992?",
+      "context": "Mnamo mwaka wa 2005, Estonia ilijiunga na Kikundi cha Vita cha nchi za Nordic cha Umoja wa Ulaya. Pia imeonyesha nia ya kuendelea kujiunga na Baraza la Nordic. Wakati mwaka wa 1992 Urusi ilichangia 92% ya biashara ya kimataifa ya Estonia, leo hii kuna utegemezi mkubwa wa kiuchumi kati ya Estonia na majirani zake wa Nordic: robo tatu ya uwekezaji wa kigeni nchini Estonia hutoka katika nchi za Nordic (hasa Finland na Sweden), ambako Estonia hupeleka 42% ya mauzo yake ya nje (ikilinganishwa na 6.5% inayokwenda Urusi, 8.8% Latvia, na 4.7% Lithuania). Kwa upande mwingine, mfumo wa kisiasa wa Estonia, kiwango chake cha kodi ya mapato kisichobadilika, na mfumo wake usio wa serikali ya ustawi huifanya iwe tofauti na nchi za Nordic na mfumo wao wa Nordic, na kwa hakika kutoka nchi nyingine nyingi za Ulaya.",
+      "gold": "92%",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "92%",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "92%",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "92%",
+          "verdict": "correct",
+          "reason": "Both answers state the same percentage.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "92",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5730221db2c2fd1400568909",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni kampuni gani iliyounda saketi ya kwanza ya kielektroniki ambayo ingeweza kuzalishwa kwa wingi na ilikuwa imara kiasi cha kuweza kufyatuliwa kutoka kwenye bunduki?",
+      "context": "Wakati wa Vita Kuu ya Pili ya Dunia, uundaji wa kifyatuzi cha ukaribu cha kuzuia ndege ulihitaji saketi ya kielektroniki ambayo ingeweza kuhimili kufyatuliwa kutoka kwenye bunduki, na ambayo ingeweza kuzalishwa kwa wingi. Kitengo cha Centralab cha Globe Union kiliwasilisha pendekezo lililokidhi mahitaji hayo: sahani ya kauri ingechapishwa kwa rangi ya metali kwa ajili ya kondakta na nyenzo ya kaboni kwa ajili ya kipingamizi, huku kapi za kauri na mirija midogo sana ya ombwe vikiunganishwa kwa kulehemu. Mbinu hiyo ilionekana kufanya kazi, na hataza iliyotokana na mchakato huo, ambayo iliwekwa siri na Jeshi la Marekani, ilikabidhiwa kwa Globe Union. Haikuwa mpaka mwaka 1984 ambapo Taasisi ya Wahandisi wa Umeme na Elektroniki (IEEE) ilimtunuku Bw. Harry W. Rubinstein, aliyekuwa mkuu wa Kitengo cha Centralab cha Globe Union, Tuzo yake ya Cledo Brunetti inayotamaniwa kwa mchango wake muhimu wa mapema katika uundaji wa vipengele vilivyochapishwa na kondakta kwenye kizio cha pamoja. Vilevile, Bw. Rubinstein aliheshimiwa mnamo 1984 na chuo chake kikuu, Chuo Kikuu cha Wisconsin-Madison, kwa uvumbuzi wake katika teknolojia ya saketi za kielektroniki zilizochapishwa na utengenezaji wa kapi.",
+      "gold": "Globe Union",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Kitengo cha Centralab cha Globe Union.",
+          "verdict": "correct",
+          "reason": "The predicted answer includes the full name of the company and conveys the same factual content.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Globe Union (kupitia Kitengo chake cha Centralab)",
+          "verdict": "correct",
+          "reason": "The predicted answer provides the same factual content with additional details about the division.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Globe Union (Kitengo cha Centralab)",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Globe Union",
+          "verdict": "correct",
+          "reason": "Both answers provide the same company name.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_56f9dccf9e9bad19000a0b23",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni mifumo mingapi mikuu ya HDTV iliyofanyiwa majaribio na SMPTE mwishoni mwa miaka ya 70?",
+      "context": "Kulikuwa na mifumo minne mikuu ya HDTV iliyofanyiwa majaribio na SMPTE mwishoni mwa miaka ya 1970, na mnamo mwaka 1979 kikundi cha utafiti cha SMPTE kilitoa ripoti ya A Study of High Definition Television Systems:",
+      "gold": "minne",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Minne.",
+          "verdict": "correct",
+          "reason": "Predicted answer matches the gold answer in factual content.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "4",
+          "verdict": "correct",
+          "reason": "The predicted answer '4' correctly represents the gold answer 'minne'.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Minne.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Mifumo 4 mikuu ya HDTV iliyofanyiwa majaribio na SMPTE mwishoni mwa miaka ya 1970.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer by stating '4' instead of 'minne', which is acceptable.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5727a3644b864d1900163914",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni nani aliyeliongoza Baraza la Kuhukumu Wazushi la Uhispania?",
+      "context": "Katika historia yote, watawala, himaya, na mataifa mengi yamewadhulumu Wayahudi wao au kutafuta kuwaangamiza kabisa. Mbinu zilizotumiwa zilianzia kufukuzwa nchini hadi mauaji ya kimbari; ndani ya mataifa, mara nyingi tishio la mbinu hizi kali lilitosha kunyamazisha upinzani. Historia ya chuki dhidi ya Wayahudi inajumuisha Vita vya Kwanza vya Msalaba vilivyosababisha mauaji ya Wayahudi; Baraza la Kuhukumu Wazushi la Uhispania (likiongozwa na Tomás de Torquemada) na Baraza la Ureno, pamoja na mateso yao na 'autos-da-fé' dhidi ya Wakristo Wapya na Wayahudi wa Marrano; mauaji ya Cossack ya Bohdan Chmielnicki nchini Ukraine; Pogrom zilizoungwa mkono na Makaisari wa Urusi; pamoja na kufukuzwa kutoka Uhispania, Ureno, Uingereza, Ufaransa, Ujerumani, na nchi nyingine ambazo Wayahudi walikuwa wamefanya makazi. Kulingana na utafiti wa mwaka 2008 uliochapishwa katika jarida la American Journal of Human Genetics, asilimia 19.8 ya idadi ya watu wa sasa wa rasi ya Iberia wana asili ya Kiyahudi ya Kisefardi, jambo linaloashiria kuwa idadi ya 'conversos' huenda ilikuwa kubwa zaidi kuliko ilivyodhaniwa hapo awali.",
+      "gold": "Tomás de Torquemada",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Tomás de Torquemada.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Tomás de Torquemada.",
+          "verdict": "correct",
+          "reason": "The predicted answer is identical to the gold answer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Tomás de Torquemada",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Tomás de Torquemada",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_56de80f54396321400ee2983",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni meli gani ya kubeba ndege iliyofanyiwa matengenezo katika Gereza la Meli la Devonport?",
+      "context": "Baada ya vita, Gereza la Meli la Devonport liliendelea kuwa na shughuli nyingi likifanya ukarabati wa meli za kubeba ndege kama vile Ark Royal na, baadaye, nyambizi za kinyuklia huku viwanda vipya vya uzalishaji mwepesi vikijengwa katika sekta mpya ya viwanda iliyotengwa, jambo lililopelekea ukuaji wa haraka wa idadi ya watu mijini. Jeshi lilikuwa limeondoka kwa kiasi kikubwa jijini humo kufikia mwaka wa 1971, huku kambi zikibomolewa katika miaka ya 1960, hata hivyo jiji hilo linasalia kuwa makao ya kikosi cha 42 Commando cha Royal Marines.",
+      "gold": "Ark Royal",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Ark Royal",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Ark Royal",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Ark Royal",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Meli ya kubeba ndege iliyofanywa badgeski ya gereza la Magereza ya Meli la Devonport milano iitwayo RFA Ark Royal",
+          "verdict": "correct",
+          "reason": "The predicted answer mentions Ark Royal, aligning with the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_570a41686d058f1900182d22",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Unaitaje bia nyeusi ambayo imetengenezwa kwa kimea kilichokaangwa au shayiri?",
+      "context": "Stout na porter ni bia nyeusi zinazotengenezwa kwa kutumia kimea kilichokaangwa au shayiri iliyokaangwa, na kwa kawaida huchachushwa kwa kutumia hamira inayofanya kazi polepole. Kuna aina mbalimbali zikiwemo Baltic porter, dry stout, na Imperial stout. Jina Porter lilitumika kwa mara ya kwanza mnamo mwaka 1721 kuelezea bia ya rangi ya hudhurungi iliyopendwa na wapagazi wa mitaani na mtoni jijini London. Bia hii baadaye ilikuja kujulikana pia kama stout, ingawa neno stout lilikuwa limetumika tangu mapema mwaka 1677. Historia na maendeleo ya stout na porter vimefungamana.",
+      "gold": "Stout na porter",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Stout na porter.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Stout na porter",
+          "verdict": "correct",
+          "reason": "Both answers mention the same types of beer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Stout na porter.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Bia nyeusi",
+          "verdict": "incorrect",
+          "reason": "The predicted answer is too general and does not specify the types of black beer as in the gold answer.",
+          "correct": false
+        }
+      },
+      "wrong_models": [
+        "llama_31_8b"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "n_wrong": 1,
+      "n_correct": 3
+    },
+    {
+      "id": "squad_sw_5727b7c62ca10214002d94ae",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni lini utaratibu wa herufi mbadala ulianzishwa katika Unicode 2.0?",
+      "context": "Mnamo mwaka wa 1996, utaratibu wa herufi mbadala (surrogate character mechanism) ulianzishwa katika Unicode 2.0, ili Unicode isidhibitiwe tena na biti 16 pekee. Hii iliongeza nafasi ya msimbo ya Unicode hadi kufikia zaidi ya pointi za msimbo milioni moja, jambo ambalo liliruhusu usimbaji wa maandishi mengi ya kihistoria (kwa mfano, Hiroglifi za Kimisri) na maelfu ya herufi ambazo hazitumiwi mara kwa mara au zilizopitwa na wakati ambazo hazikutarajiwa kuhitaji usimbaji. Miongoni mwa herufi ambazo hapo awali hazikukusudiwa kuwemo kwenye Unicode ni herufi za Kanji au Kichina zinazotumiwa mara chache, ambazo nyingi ni sehemu ya majina ya watu na mahali, jambo linalofanya herufi hizo kutumiwa mara chache, lakini kuwa muhimu zaidi kuliko ilivyodhaniwa katika muundo wa awali wa Unicode.",
+      "gold": "1996",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "1996",
+          "verdict": "correct",
+          "reason": "Both answers correctly state the year as 1996.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "1996",
+          "verdict": "correct",
+          "reason": "Both answers provide the same factual content.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Mwaka wa 1996.",
+          "verdict": "correct",
+          "reason": "Both answers indicate the same year, 1996.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Mwaka 1996",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content regarding the year 1996.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5725ebb3ec44d21400f3d754",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Hospitali ya Vilardebó imepewa jina la nani?",
+      "context": "Hospitali ya Vilardebó ndiyo hospitali pekee ya magonjwa ya akili mjini Montevideo. Ikiitwa jina la daktari na mwanasayansi wa asili Teodoro Vilardebó Matuliche, ilifunguliwa tarehe 21 Mei 1880. Hapo awali, hospitali hiyo ilikuwa miongoni mwa hospitali bora zaidi katika Amerika ya Kusini na kufikia mwaka wa 1915 ilikuwa na wagonjwa wa kulazwa 1,500. Leo hii hospitali hiyo imechakaa sana, ikiwa na kuta na sakafu zilizovunjika, ukosefu wa dawa, vitanda, na vyumba vya wafanyakazi. Ina huduma za dharura, huduma za wagonjwa wa nje, kliniki na vyumba vya kulazwa wagonjwa, na inaajiri takriban wafanyakazi 610, wakiwemo wanasaikolojia, madaktari wa akili, wafanyakazi wa kijamii, wasimamizi, walinzi, miongoni mwa wengine. Wastani wa umri wa wagonjwa ni miaka 30; zaidi ya nusu ya wagonjwa hufika kwa amri ya mahakama; 42% wanaugua ugonjwa wa skizofrenia, 18% msongo wa mawazo na wazimu, na pia kuna asilimia kubwa ya wagonjwa walio na uraibu wa dawa za kulevya.",
+      "gold": "Teodoro Vilardebó Matuliche",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Teodoro Vilardebó Matuliche",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Teodoro Vilardebó Matuliche",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Teodoro Vilardebó Matuliche.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Teodoro Vilardebó Matuliche.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_573214afe99e3014001e64e5",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Mageuzi ya Augustus yalichukuliwaje?",
+      "context": "Kuelekea mwisho wa Jamhuri, ofisi za kidini na za kisiasa zilianza kuingiliana kwa karibu zaidi; ofisi ya pontifex maximus ikawa upendeleo wa kisheria wa kikonsuli. Augustus binafsi alipewa mamlaka makubwa yasiyo ya kawaida ya kisiasa, kijeshi na kikuhani; mwanzoni kwa muda, kisha kwa maisha yake yote. Alijipatia au alitunukiwa idadi isiyo na kifani ya vyeo vikuu vya ukuhani vya Roma, ikiwa ni pamoja na kile cha pontifex maximus; kwa kuwa hakuvumbua chochote, angeweza kuvidai kama heshima za kimapokeo. Mageuzi yake yalionyeshwa kama ya kurekebisha, kurejesha na kudhibiti, badala ya kuwa ya uvumbuzi; hasa kupandishwa kwake cheo (na uanachama) wa Arvales ya kale, kukuza kwake kwa wakati Compitalia ya watu wa kawaida muda mfupi kabla ya uchaguzi wake na ufadhili wake kwa Vestals kama urejesho unaoonekana wa maadili ya Kirumi. Augustus alipata pax deorum, akaidumisha kwa kipindi chote cha utawala wake na akamteua mfuatuzi ili kuhakikisha mwendelezo wake. Hii ilibaki kuwa wajibu mkuu wa kidini na kijamii wa makaisari.",
+      "gold": "kurekebisha, kurejesha na kudhibiti",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Kama ya kurekebisha, kurejesha na kudhibiti, badala ya kuwa ya uvumbuzi.",
+          "verdict": "correct",
+          "reason": "Both answers convey the idea of reforming and restoring control, with the predicted answer adding additional context.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Yalionekana kama ya kurekebisha, kurejesha na kudhibiti, badala ya kuwa ya uvumbuzi.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer introduces the concept of 'uvumbuzi' which is not present in the gold answer.",
+          "correct": false
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Yalionyeshwa kama ya kurekebisha, kurejesha na kudhibiti, badala ya kuwa ya uvumbuzi.",
+          "verdict": "incorrect",
+          "reason": "The predicted answer introduces the idea of 'uvumbuzi' which is not present in the gold answer.",
+          "correct": false
+        },
+        "llama_31_8b": {
+          "prediction": "Mageuzi ya Augustus yalionyeshwa kama ya kurekebisha, kurejesha na kudhibiti.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer with additional context.",
+          "correct": true
+        }
+      },
+      "wrong_models": [
+        "deepseek_v4_pro",
+        "gemma_4_31b_it"
+      ],
+      "correct_models": [
+        "gemini_3_pro",
+        "llama_31_8b"
+      ],
+      "n_wrong": 2,
+      "n_correct": 2
+    },
+    {
+      "id": "squad_sw_56cc66d16d243a140015efa2",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni aina gani ya kwanza ya muunganisho iliyotumiwa na iPod kuchaji na kuhamisha faili?",
+      "context": "Hapo awali, muunganisho wa FireWire kwenye kompyuta mama ulitumiwa kusasisha nyimbo au kuchaji betri. Betri pia ingeweza kuchajiwa kwa kutumia adapta ya umeme ambayo ilijumuishwa kwenye vizazi vinne vya kwanza.",
+      "gold": "FireWire",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "noun_class_concord"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "FireWire",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "FireWire",
+          "verdict": "correct",
+          "reason": "Both answers provide the same factual content.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "FireWire",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Muunganisho wa FireWire",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_57322ed7b9d445190005e8a4",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Katika maeneo ambayo sheria zilitekelezwa kwa ukali, nini kiliwapata Wakristo?",
+      "context": "Katika baadhi ya matukio na maeneo, amri hizo zilitekelezwa kwa ukali: baadhi ya Wakristo walipinga na kufungwa gerezani au kuuawa kwa ajili ya imani yao. Wengine walitii. Baadhi ya jamii za wenyeji hazikuwa tu na Wakristo wengi, bali pia zilikuwa na nguvu na ushawishi; na baadhi ya mamlaka za mikoa zilikuwa na huruma, hususan Kaisari wa Gaul, Constantius Chlorus, baba yake Konstantino wa Kwanza. Mrithi wa Diokletiano, Galerius, aliendeleza sera dhidi ya Wakristo hadi alipozibatilisha akiwa kitandani mwa mauti mnamo mwaka 311, alipowaomba Wakristo wamwombee. Hii ilimaanisha kutambuliwa rasmi kwa umuhimu wao katika ulimwengu wa kidini wa himaya ya Roma, ingawa mmoja wa watawala wa tetrarkia, Maximinus Daia, bado aliwakandamiza Wakristo katika sehemu yake ya himaya hadi mwaka 313.",
+      "gold": "kufungwa gerezani au kuuawa",
+      "tags": {
+        "linguistic_phenomena": [
+          "locative_ni",
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Walifungwa gerezani au kuuawa.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Baadhi ya Wakristo walipinga na kufungwa gerezani au kuuawa kwa ajili ya imani yao.",
+          "verdict": "correct",
+          "reason": "The prediction conveys the same outcome for Christians as the gold answer, allowing for paraphrasing.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Walifungwa gerezani au kuuawa.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "baadhi walipigwa na au waliuawa kwa kunena kwa imani zao/sidebar.",
+          "verdict": "correct",
+          "reason": "Both answers convey that Christians faced imprisonment or death for their beliefs.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_572ec5f7cb0c0d14000f1536",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni lini CD za sauti zilianza kupatikana kwa ajili ya kununuliwa?",
+      "context": "Compact Disc (CD) ni mfumo wa kidijitali wa kuhifadhi data kwenye diski ya macho. Mfumo huu hapo awali ulitengenezwa kwa ajili ya kuhifadhi na kucheza rekodi za sauti pekee, lakini baadaye ulirekebishwa kwa ajili ya uhifadhi wa data (CD-ROM). Mifumo mingine kadhaa ilitokana na hii, ikiwa ni pamoja na uhifadhi wa sauti na data wa kuandika mara moja (CD-R), diski zinazoweza kufutwa na kuandikwa tena (CD-RW), Video Compact Disc (VCD), Super Video Compact Disc (SVCD), Photo CD, PictureCD, CD-i, na Enhanced Music CD. CD za sauti na vicheza CD za sauti vimekuwa vikipatikana kibiashara tangu Oktoba 1982.",
+      "gold": "1982",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Oktoba 1982",
+          "verdict": "correct",
+          "reason": "The predicted answer provides the month and year, which is consistent with the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Tangu Oktoba 1982.",
+          "verdict": "correct",
+          "reason": "The predicted answer provides a specific month and year, conveying the same factual content as the gold answer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Oktoba 1982.",
+          "verdict": "correct",
+          "reason": "The predicted answer specifies the month and year, which is a valid paraphrase of the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Oktoba 1982.",
+          "verdict": "correct",
+          "reason": "The predicted answer specifies the month and year, which is accurate.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5727d6c43acd2414000dedd4",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni lini Tibet ilitawaliwa na Wamanchu?",
+      "context": "Kwa miongo kadhaa, amani ilitawala nchini Tibet, lakini mnamo mwaka wa 1792 Kaizari wa Qing Qianlong alituma jeshi kubwa la China nchini Tibet ili kuwafukuza Wanepali waliokuwa wamevamia. Hii ilisababisha marekebisho mengine ya Qing katika serikali ya Tibet, safari hii kupitia mpango wa maandishi ulioitwa \"Kanuni Ishirini na Tisa za Serikali Bora nchini Tibet\". Ngome za kijeshi za Qing zilizokuwa na wanajeshi wa Qing sasa zilianzishwa pia karibu na mpaka wa Nepal. Tibet ilitawaliwa na Wamanchu katika hatua mbalimbali katika karne ya 18, na miaka iliyofuata mara tu baada ya kanuni za 1792 ilikuwa kilele cha mamlaka ya makamishna wa kifalme wa Qing; lakini hakukuwa na jaribio la kuifanya Tibet kuwa mkoa wa China.",
+      "gold": "karne ya 18",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Katika karne ya 18.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Katika karne ya 18.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content about the 18th century.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Katika karne ya 18.",
+          "verdict": "correct",
+          "reason": "Both answers refer to the 18th century.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Miaka ya 18.",
+          "verdict": "correct",
+          "reason": "Both answers refer to the same time period.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_56df368a96943c1400a5d2fb",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni lini mafuta yaligunduliwa ndani ya mipaka ya jiji?",
+      "context": "Kabla ya Vita Kuu ya Pili ya Dunia, Jiji la Oklahoma liliendeleza viwanja vikubwa vya mifugo, jambo lililovutia ajira na mapato ambayo hapo awali yalikuwa Chicago na Omaha, Nebraska. Kwa ugunduzi wa mafuta mnamo mwaka 1928 ndani ya mipaka ya jiji (ikiwa ni pamoja na chini ya Jengo la Capitol la Jimbo), Jiji la Oklahoma likawa kituo kikuu cha uzalishaji wa mafuta. Ukuaji wa baada ya vita ulienda sambamba na ujenzi wa Mfumo wa Barabara Kuu za Kimataifa, ambao ulifanya Jiji la Oklahoma kuwa njiapanda kuu kutokana na kukutana kwa barabara za I-35, I-40 na I-44. Pia lilisaidiwa na maendeleo ya serikali kuu katika Kituo cha Jeshi la Anga cha Tinker.",
+      "gold": "1928",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "literal_match",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Mwaka 1928.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content about the year.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "1928",
+          "verdict": "correct",
+          "reason": "Both answers provide the same year of discovery.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Mwaka 1928.",
+          "verdict": "correct",
+          "reason": "Both answers refer to the year 1928.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Mwaka 1928",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5728eae32ca10214002daa92",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni lini Myanmar ilipewa mamlaka ya kujitawala kama taifa?",
+      "context": "Wakati wa Vita Kuu ya Pili ya Dunia, Waingereza waliharibu majengo makuu ya serikali, visima vya mafuta na migodi ya tungsten, bati, risasi na fedha ili kuzuia visichukuliwe na Wajapani. Myanmar ilipigwa mabomu kwa kiasi kikubwa na pande zote mbili. Baada ya uhuru, nchi hiyo ilikuwa katika magofu huku miundombinu yake mikuu ikiwa imeharibiwa kabisa. Baada ya serikali ya bunge kuundwa mnamo mwaka 1948, Waziri Mkuu U Nu alianza sera ya utaifishaji na serikali ilitangazwa kuwa mmiliki wa ardhi yote. Serikali pia ilijaribu kutekeleza mpango wa Miaka Minane ambao haukufanyiwa upembuzi wa kutosha. Kufikia miaka ya 1950, mauzo ya mchele nje ya nchi yalikuwa yamepungua kwa thuluthi mbili na mauzo ya madini kwa zaidi ya 96% (ikilinganishwa na kipindi cha kabla ya Vita Kuu ya Pili ya Dunia). Mipango hiyo ilifadhiliwa kwa kiasi fulani kwa kuchapa pesa, jambo ambalo lilisababisha mfumuko wa bei.",
+      "gold": "1948",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "east_african_history"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Mwaka 1948.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content regarding the year Myanmar gained independence.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "1948",
+          "verdict": "correct",
+          "reason": "Both answers provide the same year.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Mnamo mwaka 1948.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual date of independence.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "1948",
+          "verdict": "correct",
+          "reason": "Both answers provide the same year.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_572b7b86be1ee31400cb83dc",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Aloi za zinki zilizochanganywa na shaba, alumini na magnesiamu huuzwa kama nini?",
+      "context": "Aloi za zinki hasa zikiwa na kiasi kidogo cha shaba, alumini, na magnesiamu ni muhimu katika uundaji wa vyuma kwa njia ya shinikizo (die casting) pamoja na uundaji wa mzunguko (spin casting), hasa katika viwanda vya magari, umeme, na vifaa vya ujenzi. Aloi hizi huuzwa kwa jina la Zamak. Mfano wa aloi hizi ni zinki alumini. Kiwango kidogo cha joto la kuyeyuka pamoja na wepesi wa mtiririko wa aloi hiyo hufanya uzalishaji wa maumbo madogo na tata uwezekane. Joto dogo la kufanyia kazi husababisha bidhaa zilizoundwa kupoa haraka na hivyo kuwezesha uunganishaji wa haraka. Aloi nyingine, inayouzwa kwa jina la chapa Prestal, ina asilimia 78 ya zinki na asilimia 22 ya alumini na inaripotiwa kuwa na nguvu karibu sawa na chuma lakini inayovutika kama plastiki. Uwezo huu mkubwa wa aloi hiyo kuvutika huifanya iweze kufinyangwa kwa kutumia kalibu zilizotengenezwa kwa kauri na simenti.",
+      "gold": "Zamak",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Zamak.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Zamak",
+          "verdict": "correct",
+          "reason": "Both answers refer to the same alloy commonly known as zamak.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Zamak",
+          "verdict": "correct",
+          "reason": "Predicted answer matches the gold answer perfectly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Zamak",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5733f58f4776f419006615b6",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Katika kila msimu isipokuwa 2001-02 na 2011-12, angalau timu ngapi za Ligi Kuu zimeshushwa daraja?",
+      "context": "Kuwepo kwa pengo linaloongezeka kati ya Ligi Kuu na Ligi ya Soka. Tangu kujitenga kwake na Ligi ya Soka, klabu nyingi zilizoimarika katika Ligi Kuu zimefanikiwa kujiweka mbali na wenzao wa ligi za chini. Kwa kiasi kikubwa kutokana na tofauti ya mapato ya haki za televisheni kati ya ligi hizo, timu nyingi zilizopandishwa daraja hivi karibuni zimepata ugumu wa kuepuka kushushwa daraja katika msimu wao wa kwanza kwenye Ligi Kuu. Katika kila msimu isipokuwa 2001–02 na 2011–12, angalau mgeni mmoja wa Ligi Kuu ameshushwa daraja kurudi kwenye Ligi ya Soka. Mnamo 1997–98 klabu zote tatu zilizopandishwa daraja zilishushwa daraja mwishoni mwa msimu.",
+      "gold": "mmoja",
+      "tags": {
+        "linguistic_phenomena": [
+          "noun_class_concord",
+          "passive"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Moja.",
+          "verdict": "correct",
+          "reason": "Both answers convey the same factual content.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Angalau timu moja.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Mgeni mmoja.",
+          "verdict": "correct",
+          "reason": "The predicted answer conveys the same factual content as the gold answer.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Timu 1.",
+          "verdict": "correct",
+          "reason": "Both answers convey the fact that one team was relegated.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5706b0940eeca41400aa0d2d",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni shirika gani lililoiorodhesha New Delhi katika nafasi ya 39 kwenye shughuli za kiuchumi mnamo mwaka 2011?",
+      "context": "Ripoti ya Utajiri wa Dunia ya mwaka 2011 inaorodhesha shughuli za kiuchumi mjini New Delhi katika nafasi ya 39, lakini kwa ujumla mji mkuu huo umeorodheshwa katika nafasi ya 37, juu ya miji kama Jakarta na Johannesburg. New Delhi ikishirikiana na Beijing inashikilia nafasi ya kwanza kama kivutio kinacholengwa zaidi cha soko la rejareja linalochipukia miongoni mwa masoko ya Asia-Pasifiki.",
+      "gold": "Ripoti ya Utajiri wa Dunia",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive",
+          "locative_ni"
+        ],
+        "paraphrase_distance": "paraphrase",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Ripoti ya Utajiri wa Dunia",
+          "verdict": "correct",
+          "reason": "Both answers are the same and convey the same factual content.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Ripoti ya Utajiri wa Dunia",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Ripoti ya Utajiri wa Dunia.",
+          "verdict": "correct",
+          "reason": "Both answers refer to the same report.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Ripoti ya Utajiri wa Dunia.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    },
+    {
+      "id": "squad_sw_5728cafa2ca10214002da7fb",
+      "dataset": "squad_sw",
+      "lang": "sw",
+      "question": "Ni nyota gani wa filamu za kimya aliyetengeneza filamu kama vile The Little Tramp aliyetokea London?",
+      "context": "London imekuwa na mchango mkubwa katika tasnia ya filamu, ikiwa na studio kuu huko Ealing na jumuiya ya madoido maalum na maandalizi ya baada ya kurekodi iliyoko Soho. Kampuni ya Working Title Films ina makao yake makuu jijini London. London imekuwa mandhari ya filamu mbalimbali zikiwemo Oliver Twist (1948), Scrooge (1951), Peter Pan (1953), The 101 Dalmatians (1961), My Fair Lady (1964), Mary Poppins (1964), Blowup (1966), The Long Good Friday (1980), Notting Hill (1999), Love Actually (2003), V For Vendetta (2005), Sweeney Todd: The Demon Barber Of Fleet Street (2008) na The King's Speech (2010). Waigizaji na watengenezaji filamu mashuhuri kutoka London ni pamoja na; Charlie Chaplin, Alfred Hitchcock, Michael Caine, Helen Mirren, Gary Oldman, Christopher Nolan, Jude Law, Tom Hardy, Keira Knightley na Daniel Day-Lewis. Kufikia mwaka wa 2008, Tuzo za Filamu za Chuo cha Uingereza zimekuwa zikifanyika katika jengo la Royal Opera House. London ni kituo kikuu cha uzalishaji wa vipindi vya televisheni, ikiwa na studio kama vile BBC Television Centre, The Fountain Studios na The London Studios. Vipindi vingi vya televisheni vimeandaliwa jijini London, ikiwemo tamthilia maarufu ya EastEnders, inayorushwa na BBC tangu mwaka 1985.",
+      "gold": "Charlie Chaplin",
+      "tags": {
+        "linguistic_phenomena": [
+          "passive"
+        ],
+        "paraphrase_distance": "requires_inference",
+        "domain": "general"
+      },
+      "openbook": {
+        "gemini_3_pro": {
+          "prediction": "Charlie Chaplin.",
+          "verdict": "correct",
+          "reason": "Both answers refer to the same individual, Charlie Chaplin.",
+          "correct": true
+        },
+        "deepseek_v4_pro": {
+          "prediction": "Charlie Chaplin",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "gemma_4_31b_it": {
+          "prediction": "Charlie Chaplin",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        },
+        "llama_31_8b": {
+          "prediction": "Charlie Chaplin.",
+          "verdict": "correct",
+          "reason": "The predicted answer matches the gold answer exactly.",
+          "correct": true
+        }
+      },
+      "wrong_models": [],
+      "correct_models": [
+        "gemini_3_pro",
+        "deepseek_v4_pro",
+        "gemma_4_31b_it",
+        "llama_31_8b"
+      ],
+      "n_wrong": 0,
+      "n_correct": 4
+    }
+  ]
+}

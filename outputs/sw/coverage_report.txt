@@ -2,22 +2,22 @@
 COVERAGE REPORT — Swahili
 ================================================================
 
-TyDi QA Swahili (native)  (n=500)
+TyDi QA Swahili (native)  (n=496)
 ----------------------------------------
 Linguistic phenomena (% of items):
-  noun_class_concord      232  ( 46.4%)
+  noun_class_concord      231  ( 46.6%)
   applicative               0  (  0.0%)
-  passive                  15  (  3.0%)
-  locative_ni              64  ( 12.8%)
-  none                    197  ( 39.4%)
+  passive                  11  (  2.2%)
+  locative_ni              63  ( 12.7%)
+  none                    197  ( 39.7%)
 Paraphrase distance:
-  literal_match           119  ( 23.8%)
-  paraphrase              306  ( 61.2%)
-  requires_inference       75  ( 15.0%)
+  literal_match           118  ( 23.8%)
+  paraphrase              305  ( 61.5%)
+  requires_inference       73  ( 14.7%)
 Domain:
-  east_african_history     96  ( 19.2%)
-  east_african_geography   76  ( 15.2%)
-  general                 328  ( 65.6%)
+  east_african_history     95  ( 19.2%)
+  east_african_geography   75  ( 15.1%)
+  general                 326  ( 65.7%)
 
 SQuAD-SW (Gemini translated)  (n=498)
 ----------------------------------------
